@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="description" content="מחולל כרטיסי בינגו מותאם אישית בחינם (FREE). צרו כרטיסי בינגו מספרים או ריקים בכל גודל (3x3, 4x4, 5x5), עם טווח מספרים לבחירתכם, וכותרות עמודות מותאמות אישית. קל ונוח להדפסה כ-PDF.">
+    <meta name="description" lang="en" content="Free custom Bingo card generator (FREE). Create numbered or blank bingo cards in any size (3x3, 4x4, 5x5) with adjustable number range and custom column titles. Easy to print as PDF.">
+    
+    <meta name="keywords" content="מחולל בינגו חינם, כרטיסי בינגו להדפסה, יצירת בינגו מספרים, בינגו ריק להדפסה, בינגו 5x5, מחולל כרטיסים, custom bingo generator free">
+    <meta name="keywords" lang="en" content="free bingo card generator, custom bingo maker, printable bingo cards, number bingo, blank bingo cards, bingo 5x5, custom column titles, free bingo game">
+
+    <meta property="og:title" content="מחולל כרטיסי בינגו מותאם אישית (חינם)">
+    <meta property="og:description" content="מחולל כרטיסי בינגו מותאם אישית בחינם עם אפשרויות גודל וצבע מותאמות אישית.">
+    <meta property="og:type" content="website">
+    <title data-i18n="appTitle">מחולל כרטיסי בינגו מותאם אישית (חינם)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* הגדרות Tailwind בסיסיות */
+        :root {
+            --header-color: #3b82f6; /* כחול כברירת מחדל */
+        }
+        body {
+            font-family: 'Heebo', sans-serif;
+            background-color: #f7f7f7;
+            padding: 0;
+            margin: 0;
+        }
+        
+        /* סגנון כללי לאנגלית */
+        body.en {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        /* --- פריסת Desktop (מעל md) - 3 עמודות --- */
+        #desktop-layout-wrapper {
+            max-width: 1280px; /* רוחב מוגבל למרכז */
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        @media (min-width: 768px) {
+            #desktop-layout-wrapper {
+                /* משתמש ב-grid ליצירת פריסת 3 עמודות. 
+                   עמודות הפרסומות הצידיות ברוחב 200px קבוע, התוכן המרכזי משתמש ביתרה. */
+                display: grid;
+                grid-template-columns: 200px 1fr 200px; 
+                gap: 1.5rem; /* מרווח בין העמודות */
+                padding: 1.5rem 0;
+            }
+            
+            /* ממקם את התוכן הראשי ואת הפרסומות האופקיות בעמודה המרכזית */
+            #main-content-column {
+                grid-column: 2;
+            }
+            
+            /* ממקם את הפרסומת השמאלית */
+            #ad-column-left {
+                grid-column: 1;
+            }
+            
+            /* ממקם את הפרסומת הימנית */
+            #ad-column-right {
+                grid-column: 3;
+            }
+            
+            /* הקונטיינר של הכרטיסים במרכז, אבל מגביל רוחב כדי שלא יהיה רחב מדי */
+            #output-container {
+                 max-width: 100%; /* רוחב מלא בתוך העמודה המרכזית */
+            }
+        }
+        
+        /* --- פריסה עיקרית (מסך): עמודה אנכית --- (מובייל) */
+        /* מחיל את סגנונות ברירת המחדל ל-output-container במובייל (לפני md) */
+        #output-container {
+            display: flex;
+            flex-direction: column; 
+            align-items: center;    
+            gap: 0;
+            padding: 0;
+            margin: 0 auto; 
+        }
+
+        /* שאר הסגנונות הקודמים (בינגו-קארד, הדפסה) נשארים כפי שהיו */
+
+        .bingo-card {
+            border: 3px solid #1f2937;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex; 
+            flex-direction: column;
+            margin: 1.5rem 0; 
+            width: 90%; 
+            max-width: 450px; 
+        }
+
+        .bingo-table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed; 
+        }
+
+        .bingo-table th, .bingo-table td {
+            border: 1px solid #d1d5db;
+            text-align: center;
+            padding: 0.5rem;
+            height: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .bingo-table th {
+            color: white;
+            background-color: var(--header-color);
+            border-bottom: 2px solid #1f2937;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .free-cell {
+            background-color: #fca5a5; 
+            font-size: 1.2rem;
+            color: #b91c1c; 
+        }
+        
+        .page-break-after-group {
+            width: 90%;
+            max-width: 450px;
+            height: 40px;
+            border-bottom: 2px dashed #9ca3af; 
+            margin: 2rem 0;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+            color: #4b55e63;
+        }
+
+        @media (max-width: 768px) {
+            .bingo-card {
+                width: 100%;
+                margin: 0.5rem 0;
+                max-width: none;
+            }
+            .bingo-table th, .bingo-table td {
+                padding: 0.3rem;
+                height: 40px;
+                font-size: 1rem;
+            }
+        }
+        
+        /* --- עיצוב ספציפי להדפסה (מצב PDF) --- */
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                color-adjust: exact !important;
+                box-shadow: none !important; 
+            }
+
+            /* הסתרת כל האלמנטים שאינם כרטיסים, כולל הפרסומות והבקרים */
+            #main-controls-area, #ad-column-left, #ad-column-right, #ad-unit-1, #ad-unit-2, 
+            header, footer, nav, aside,
+            body::before, body::after, #print-controls,
+            .p-3.text-center.bg-gray-700.text-white.font-bold.text-xl { 
+                 display: none !important;
+                 margin: 0 !important;
+                 padding: 0 !important;
+                 height: 0 !important;
+                 width: 0 !important;
+            }
+            
+            @page {
+                size: A4 portrait; 
+                margin: 0.5cm; 
+            }
+
+            html, body {
+                background-color: white !important;
+                overflow: visible !important; 
+            }
+            
+            #output-container {
+                display: block !important; 
+                flex-direction: initial !important; 
+                justify-content: initial !important;
+                height: auto !important;
+                gap: 0 !important; 
+                padding: 1cm 0.5cm !important; 
+            }
+
+            .print-page-wrapper {
+                height: calc(100vh - 1cm); 
+                width: 100%;
+                display: grid; 
+                padding: 0;
+                margin: 0;
+                page-break-after: avoid; 
+            }
+
+            .cards-per-page-1 { grid-template-rows: 1fr; }
+            .cards-per-page-2 { grid-template-rows: repeat(2, 1fr); }
+            .cards-per-page-3 { grid-template-rows: repeat(3, 1fr); }
+            .cards-per-page-4 { grid-template-rows: repeat(4, 1fr); }
+
+            .bingo-card {
+                width: 100% !important; 
+                max-width: 12cm !important; 
+                box-shadow: none !important;
+                border: 1px solid #333 !important;
+                border-radius: 0 !important;
+                margin: 0 auto !important; 
+                page-break-inside: avoid; 
+                direction: ltr !important; 
+                place-self: center; 
+            }
+            
+            .page-break-after-group {
+                height: 0 !important;
+                border: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                page-break-after: always !important; 
+                display: block !important;
+                width: 100% !important;
+                visibility: hidden !important;
+                font-size: 0 !important;
+            }
+
+            .bingo-table th, .bingo-table td {
+                font-size: 10pt;
+                padding: 3px; 
+                height: 40px; 
+                border: 1px solid #666 !important; 
+            }
+        }
+        
+        /* --- עיצוב בלוק פרסומת (לצורך הדמיה) --- */
+        .ad-placeholder {
+            background-color: #ffe4e6; /* ורוד בהיר */
+            border: 1px dashed #f43f5e; /* אדום */
+            color: #f43f5e;
+            text-align: center;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem 0; /* מרווח אנכי במובייל */
+            width: 100%;
+        }
+        
+        /* Ad 1 - באנר רחב */
+        #ad-unit-1 {
+             height: 90px;
+             max-width: 728px;
+             margin: 1rem auto;
+        }
+        
+        /* Ad 2 - מלבן מרכזי */
+        #ad-unit-2 {
+             height: 280px;
+             max-width: 336px;
+             margin: 1rem auto;
+        }
+        
+        /* Ad 3 & 4 - עמודות צד אנכיות (מוסתרות במובייל) */
+        @media (min-width: 768px) {
+            #ad-column-left .ad-placeholder, #ad-column-right .ad-placeholder {
+                height: 600px; /* גודל סטנדרטי למודעת צד */
+                max-width: 200px;
+                margin: 0; /* ללא מרווח אנכי מיותר ב-Desktop */
+            }
+        }
+
+
+    </style>
+</head>
+<body class="bg-gray-100 p-4 md:p-0">
+
+    <div id="ad-column-left" class="hidden md:block">
+        <div id="ad-unit-3" class="ad-placeholder">
+            מודעת צד 3 (300x600 / 160x600)
+            <br>
+            **מחשב שולחני בלבד**
+        </div>
+    </div>
+    
+    <div id="main-content-column">
+    
+        <div id="main-controls-area" class="max-w-6xl mx-auto">
+            
+            <div id="lang-button-wrapper" class="w-full mb-4 flex justify-start">
+                <button id="lang-button" onclick="switchLanguage()" class="text-sm px-3 py-1 bg-gray-200 text-gray-700 rounded-lg shadow hover:bg-gray-300 transition duration-150">English</button>
+            </div>
+
+            <h1 class="text-3xl md:text-4xl font-bold text-center text-blue-800 mb-8" data-i18n="appTitle">מחולל כרטיסי בינגו</h1>
+
+            <div id="ad-unit-1" class="ad-placeholder">
+                מודעת באנר 1 (728x90)
+                <br>
+                **מעל כפתורי הבקרה**
+            </div>
+            
+            <div id="controls" class="bg-white p-6 md:p-8 rounded-xl shadow-lg mb-8">
+                <h2 class="text-xl font-semibold mb-6 text-gray-700" data-i18n="settingsTitle">הגדרות יצירת כרטיסים</h2>
+                
+                <div id="error-message" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                    <strong class="font-bold" data-i18n="errorPrefix">שגיאה: </strong>
+                    <span id="error-text" class="block sm:inline"></span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    
+                    <div>
+                        <label for="boardSize" class="block text-sm font-medium text-gray-700 mb-1" data-i18n="boardSizeLabel">גודל הטבלה</label>
+                        <select id="boardSize" onchange="updateColumnInputs()" class="mt-1 w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 transition duration-150">
+                            <option value="5">5x5</option>
+                            <option value="4">4x4</option>
+                            <option value="3">3x3</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="emptyCardsOption" class="block text-sm font-medium text-gray-700 mb-1" data-i18n="emptyCardsLabel">כרטיסיות ריקות (ללא מספרים)</label>
+                        <select id="emptyCardsOption" onchange="toggleMaxNumberInput()" class="mt-1 w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 transition duration-150">
+                            <option value="no" data-i18n="emptyCardsNo">לא</option>
+                            <option value="yes" data-i18n="emptyCardsYes">כן (הדפס רק כותרות)</option>
+                        </select>
+                    </div>
+
+                    <div id="maxNumberControl">
+                        <label for="maxNumberInput" class="block text-sm font-medium text-gray-700 mb-1" data-i18n="maxNumberLabel">טווח מספרים מקסימלי (1-90)</label>
+                        <input type="text" id="maxNumberInput" value="90" maxlength="2" inputmode="numeric" pattern="[0-9]*" class="mt-1 w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" required oninput="validateMaxNumber()">
+                    </div>
+
+                    <div>
+                        <label for="centerOption" class="block text-sm font-medium text-gray-700 mb-1" data-i18n="centerOptionLabel">משבצת מרכזית</label>
+                        <select id="centerOption" class="mt-1 w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 transition duration-150">
+                            <option value="free" data-i18n="centerOptionFree">FREE</option>
+                            <option value="number" data-i18n="centerOptionNumber">מספר רגיל</option>
+                            <option value="blank" data-i18n="centerOptionBlank">ריק</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="totalCards" class="block text-sm font-medium text-gray-700 mb-1" data-i18n="totalCardsLabel">סה"כ כרטיסים ליצירה (1-150)</label>
+                        <input type="number" id="totalCards" value="10" min="1" max="150" class="mt-1 w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
+                    </div>
+
+                    <div>
+                        <label for="cardsPerPage" class="block text-sm font-medium text-gray-700 mb-1" data-i18n="cardsPerPageLabel">מספר כרטיסים בעמוד (להדפסה/PDF)</label>
+                        <select id="cardsPerPage" class="mt-1 w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 transition duration-150">
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="headerColor" class="block text-sm font-medium text-gray-700 mb-1" data-i18n="headerColorLabel">בחירת צבע כותרות</label>
+                        <input type="color" id="headerColor" value="#1d4ed8" onchange="updateGlobalColor(this.value)" class="mt-1 w-full h-12 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 transition duration-150">
+                    </div>
+                </div>
+
+                <div class="mt-8">
+                    <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="columnTitlesLabel">כותרות עמודות (ברירת מחדל: BINGO / BNG)</label>
+                    <div id="columnInputsContainer" class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                        </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row justify-between gap-4 mt-8">
+                    <button onclick="generateAllCards()" class="w-full sm:w-2/3 py-3 px-6 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 transition duration-200 focus:outline-none focus:ring-4 focus:ring-green-500 focus:ring-opacity-50" data-i18n="generateButton">
+                        צור כרטיסי בינגו
+                    </button>
+                    <button onclick="resetSettings()" class="w-full sm:w-1/3 py-3 px-6 bg-gray-400 text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-500 transition duration-200 focus:outline-none focus:ring-4 focus:ring-gray-300 focus:ring-opacity-50" data-i18n="resetButton">
+                        איפוס הגדרות
+                    </button>
+                </div>
+                
+                <p class="text-center text-xs text-gray-400 mt-4" data-i18n="credit">created by havivon</p>
+            </div>
+
+            <div id="ad-unit-2" class="ad-placeholder">
+                מודעת מלבן 2 (336x280 / 300x250)
+                <br>
+                **לפני הפלט**
+            </div>
+            
+            <div id="print-controls" class="bg-white p-6 md:p-8 rounded-xl shadow-lg mb-8 text-center hidden">
+                <button id="print-button" onclick="printCards()" class="py-3 px-6 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-200 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50" data-i18n="printButton">
+                    הדפסה / שמירה כ-PDF
+                </button>
+                <p class="text-sm text-gray-500 mt-3" data-i18n="printTip">כפתור זה פותח את חלון ההדפסה של הדפדפן. בחר 'שמור כ-PDF' כיעד במדפסת.</p>
+            </div>
+        </div>
+        <div id="output-container" class="max-w-6xl mx-auto"> 
+            </div>
+        
+        <p id="initial-message" class="text-center w-full text-gray-500 mt-10 max-w-6xl mx-auto" data-i18n="initialMessage">הגדר את הפרמטרים ולחץ "צור כרטיסי בינגו" כדי להתחיל.</p>
+        
+    </div>
+    <div id="ad-column-right" class="hidden md:block">
+        <div id="ad-unit-4" class="ad-placeholder">
+            מודעת צד 4 (300x600 / 160x600)
+            <br>
+            **מחשב שולחני בלבד**
+        </div>
+    </div>
+    
+    <div id="desktop-layout-wrapper">
+        </div>
+    
+    <script>
+        
+        // --- מערך תרגומים (נשאר ללא שינוי מהותי) ---
+        const TRANSLATIONS = {
+            he: {
+                // כללי
+                appTitle: 'מחולל כרטיסי בינגו מותאם אישית',
+                buttonToEnglish: 'English',
+                buttonToHebrew: 'עברית',
+                credit: 'created by havivon',
+                // הגדרות
+                settingsTitle: 'הגדרות יצירת כרטיסים',
+                boardSizeLabel: 'גודל הטבלה',
+                emptyCardsLabel: 'כרטיסיות ריקות (ללא מספרים)',
+                emptyCardsNo: 'לא',
+                emptyCardsYes: 'כן (הדפס רק כותרות)',
+                maxNumberLabel: 'טווח מספרים מקסימלי (1-90)',
+                centerOptionLabel: 'משבצת מרכזית',
+                centerOptionFree: 'FREE',
+                centerOptionNumber: 'מספר רגיל',
+                centerOptionBlank: 'ריק',
+                totalCardsLabel: 'סה"כ כרטיסים ליצירה (1-150)',
+                cardsPerPageLabel: 'מספר כרטיסים בעמוד (להדפסה/PDF)',
+                headerColorLabel: 'בחירת צבע כותרות',
+                columnTitlesLabel: 'כותרות עמודות (ברירת מחדל: BINGO / BNG)',
+                generateButton: 'צור כרטיסי בינגו',
+                resetButton: 'איפוס הגדרות',
+                // הדפסה
+                printButton: 'הדפסה / שמירה כ-PDF',
+                printTip: "כפתור זה פותח את חלון ההדפסה של הדפדפן. בחר 'שמור כ-PDF' כיעד במדפסת.",
+                initialMessage: 'הגדר את הפרמטרים ולחץ "צור כרטיסי בינגו" כדי להתחיל.',
+                // דינמיים
+                cardTitle: 'כרטיס מספר',
+                errorPrefix: 'שגיאה:',
+                errMinNum: 'מספר מינימלי הוא 1. הוגדר ל-1.',
+                errMaxNum: 'ניתן להקליד עד המספר 90. הוגדר ל-90.',
+                errColTitleEmpty: 'כותרת עמודה',
+                errCannotBeEmpty: 'אינה יכולה להיות ריקה.',
+                errRangeTooSmall1: 'טווח המספרים המקסימלי (עד',
+                errRangeTooSmall2: ') קטן מדי עבור לוח בגודל',
+                errRangeTooSmall3: '. דרושים לפחות',
+                errRangeTooSmall4: 'מספרים.',
+                errNoCardsToPrint: 'אנא צור כרטיסים קודם לכן באמצעות כפתור "צור כרטיסי בינגו".',
+                pageBreakText: '--- סוף עמוד הדפסה',
+                colTitlePrefix: 'כותרת עמודה',
+            },
+            en: {
+                // General
+                appTitle: 'Custom Bingo Card Generator',
+                buttonToEnglish: 'English',
+                buttonToHebrew: 'עברית',
+                credit: 'created by havivon',
+                // Settings
+                settingsTitle: 'Card Generation Settings',
+                boardSizeLabel: 'Board Size',
+                emptyCardsLabel: 'Empty Cards (No Numbers)',
+                emptyCardsNo: 'No',
+                emptyCardsYes: 'Yes (Print Titles Only)',
+                maxNumberLabel: 'Maximum Number Range (1-90)',
+                centerOptionLabel: 'Center Cell',
+                centerOptionFree: 'FREE',
+                centerOptionNumber: 'Regular Number',
+                centerOptionBlank: 'Blank',
+                totalCardsLabel: 'Total Cards to Generate (1-150)',
+                cardsPerPageLabel: 'Cards Per Page (for Print/PDF)',
+                headerColorLabel: 'Select Header Color',
+                columnTitlesLabel: 'Column Titles (Default: BINGO / BNG)',
+                generateButton: 'Generate Bingo Cards',
+                resetButton: 'Reset Settings',
+                // Print
+                printButton: 'Print / Save as PDF',
+                printTip: "This button opens your browser's print dialog. Select 'Save as PDF' as the destination.",
+                initialMessage: 'Set the parameters and click "Generate Bingo Cards" to start.',
+                // Dynamic
+                cardTitle: 'Card Number',
+                errorPrefix: 'Error:',
+                errMinNum: 'Minimum number is 1. Set to 1.',
+                errMaxNum: 'Maximum number allowed is 90. Set to 90.',
+                errColTitleEmpty: 'Column title',
+                errCannotBeEmpty: 'cannot be empty.',
+                errRangeTooSmall1: 'The maximum number range (up to',
+                errRangeTooSmall2: ') is too small for a board of size',
+                errRangeTooSmall3: '. At least',
+                errRangeTooSmall4: 'numbers are required.',
+                errNoCardsToPrint: 'Please generate cards first using the "Generate Bingo Cards" button.',
+                pageBreakText: '--- End of Print Page',
+                colTitlePrefix: 'Column Title',
+            }
+        };
+
+        // --- גלובליים ---
+        let currentLang = 'he'; // מתחיל בעברית
+        let cardsCache = null; 
+        let lastSettings = {}; 
+
+        // --- פונקציות תרגום (נשאר ללא שינוי) ---
+
+        function translateElement(element, key) {
+            const translation = TRANSLATIONS[currentLang][key];
+            if (element.tagName === 'INPUT' || element.tagName === 'BUTTON') {
+                element.value = translation;
+            } else {
+                element.textContent = translation;
+            }
+        }
+        
+        function getTranslation(key) {
+            return TRANSLATIONS[currentLang][key];
+        }
+
+        function switchLanguage() {
+            currentLang = currentLang === 'he' ? 'en' : 'he';
+            const newDir = currentLang === 'he' ? 'rtl' : 'ltr';
+            
+            // עדכון כיוון ושפת המסמך
+            document.documentElement.setAttribute('lang', currentLang);
+            document.documentElement.setAttribute('dir', newDir);
+            document.body.classList.toggle('en', currentLang === 'en');
+            
+            // עדכון כפתור השפה (התיקון העיקרי)
+            const langButton = document.getElementById('lang-button');
+            const langButtonWrapper = document.getElementById('lang-button-wrapper');
+
+            if (currentLang === 'en') {
+                 // האתר באנגלית (LTR) -> הכפתור צריך להראות 'עברית' ויוצג בצד ימין (justify-end)
+                langButton.textContent = TRANSLATIONS.he.buttonToHebrew; 
+                langButtonWrapper.classList.remove('justify-start');
+                langButtonWrapper.classList.add('justify-end');
+            } else {
+                // האתר בעברית (RTL) -> הכפתור צריך להראות 'English' ויוצג בצד שמאל (justify-start)
+                langButton.textContent = TRANSLATIONS.he.buttonToEnglish; 
+                langButtonWrapper.classList.remove('justify-end');
+                langButtonWrapper.classList.add('justify-start');
+            }
+
+            // עדכון כל האלמנטים המתורגמים
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                const translation = TRANSLATIONS[currentLang][key];
+                
+                if (element.tagName === 'INPUT' && element.type !== 'submit' && element.type !== 'button') {
+                    // אין צורך לתרגם INPUTs רגילים
+                } else if (element.tagName === 'OPTION') {
+                     // עבור אפשרויות, אנו משתמשים במאפיין data-i18n על ה-OPTION עצמו
+                     element.textContent = translation;
+                } else if (key && translation) {
+                    element.textContent = translation;
+                }
+            });
+            
+            // עדכון רכיבים תלויים שאינם מכוסים ע"י data-i18n (כותרות עמודות, שגיאות)
+            updateColumnInputs();
+            hideCustomError();
+            
+            // אם יש כרטיסים מוצגים, רנדר מחדש כדי לעדכן כותרות
+            if (cardsCache) {
+                 renderCardsToOutput(cardsCache, parseInt(document.getElementById('cardsPerPage').value));
+            }
+        }
+        
+
+        // --- פונקציות עזר כלליות (נשאר ללא שינוי) ---
+
+        function clearOutput() {
+            const outputContainer = document.getElementById('output-container');
+            const initialMessage = document.getElementById('initial-message');
+            const printControls = document.getElementById('print-controls');
+            
+            outputContainer.innerHTML = '';
+            initialMessage.classList.remove('hidden'); 
+            printControls.classList.add('hidden');
+            cardsCache = null; 
+        }
+
+        function showCustomError(message) {
+            const errorDiv = document.getElementById('error-message');
+            const errorText = document.getElementById('error-text');
+            errorText.textContent = `${getTranslation('errorPrefix')} ${message}`;
+            errorDiv.classList.remove('hidden');
+        }
+
+        function hideCustomError() {
+            document.getElementById('error-message').classList.add('hidden');
+        }
+
+        // --- בקרת קלט וצבע (נשאר ללא שינוי) ---
+        
+        function toggleMaxNumberInput() {
+            const isChecked = document.getElementById('emptyCardsOption').value === 'yes';
+            const maxNumberInput = document.getElementById('maxNumberInput');
+            
+            if (isChecked) {
+                maxNumberInput.disabled = true;
+                maxNumberInput.classList.add('opacity-50', 'bg-gray-200');
+                hideCustomError(); 
+            } else {
+                maxNumberInput.disabled = false;
+                maxNumberInput.classList.remove('opacity-50', 'bg-gray-200');
+                validateMaxNumber(); 
+            }
+        }
+
+        function validateMaxNumber() {
+            const input = document.getElementById('maxNumberInput');
+            if (input.disabled) return 0; 
+
+            input.value = input.value.replace(/[^0-9]/g, '').substring(0, 2);
+            let value = parseInt(input.value);
+
+            if (isNaN(value) || input.value === '') {
+                hideCustomError();
+                return 90; 
+            }
+            if (value < 1) {
+                showCustomError(getTranslation('errMinNum'));
+                input.value = 1;
+                return 1;
+            }
+            if (value > 90) {
+                showCustomError(getTranslation('errMaxNum'));
+                input.value = 90; 
+                return 90;
+            } else {
+                hideCustomError();
+            }
+            return value;
+        }
+
+        function updateGlobalColor(color) {
+            document.documentElement.style.setProperty('--header-color', color);
+        }
+
+        function updateColumnInputs() {
+            const size = parseInt(document.getElementById('boardSize').value);
+            const container = document.getElementById('columnInputsContainer');
+            container.innerHTML = '';
+            
+            let defaultTitles;
+            if (size === 5) {
+                defaultTitles = ['B', 'I', 'N', 'G', 'O'];
+                container.className = currentLang === 'he' ? 'grid grid-cols-2 md:grid-cols-5 gap-4' : 'grid grid-cols-2 md:grid-cols-5 gap-4';
+            } else if (size === 4) {
+                defaultTitles = ['B', 'I', 'N', 'G'];
+                container.className = currentLang === 'he' ? 'grid grid-cols-2 md:grid-cols-4 gap-4' : 'grid grid-cols-2 md:grid-cols-4 gap-4';
+            } else if (size === 3) {
+                defaultTitles = ['B', 'N', 'G'];
+                container.className = currentLang === 'he' ? 'grid grid-cols-2 md:grid-cols-3 gap-4' : 'grid grid-cols-2 md:grid-cols-3 gap-4';
+            }
+            
+            const colTitlePrefix = getTranslation('colTitlePrefix');
+
+            for (let i = 0; i < size; i++) {
+                const inputWrapper = document.createElement('div');
+                const titleText = `${colTitlePrefix} ${i + 1}`;
+                inputWrapper.innerHTML = `
+                    <label for="colTitle${i}" class="block text-xs font-medium text-gray-500 mb-1">${titleText}</label>
+                    <input type="text" id="colTitle${i}" value="${defaultTitles[i] || ''}" maxlength="5" class="w-full p-2 border border-gray-300 rounded-lg shadow-sm text-center">
+                `;
+                container.appendChild(inputWrapper);
+            }
+        }
+        
+        function resetSettings() {
+            // קבועים לערכי ברירת מחדל
+            const DEFAULT_SETTINGS = {
+                boardSize: '5',
+                emptyCardsOption: 'no',
+                maxNumberInput: '90',
+                centerOption: 'free',
+                totalCards: '10',
+                cardsPerPage: '2',
+                headerColor: '#1d4ed8',
+            };
+            
+            document.getElementById('boardSize').value = DEFAULT_SETTINGS.boardSize;
+            document.getElementById('emptyCardsOption').value = DEFAULT_SETTINGS.emptyCardsOption;
+            document.getElementById('maxNumberInput').value = DEFAULT_SETTINGS.maxNumberInput;
+            document.getElementById('centerOption').value = DEFAULT_SETTINGS.centerOption;
+            document.getElementById('totalCards').value = DEFAULT_SETTINGS.totalCards;
+            document.getElementById('cardsPerPage').value = DEFAULT_SETTINGS.cardsPerPage;
+            document.getElementById('headerColor').value = DEFAULT_SETTINGS.headerColor;
+            
+            updateColumnInputs(); 
+            updateGlobalColor(DEFAULT_SETTINGS.headerColor); 
+            toggleMaxNumberInput(); 
+            hideCustomError();
+            clearOutput(); 
+        }
+
+        // --- לוגיקת יצירת כרטיסים (נשאר ללא שינוי) ---
+
+        function createSingleCardData(size, maxNum, centerOption, columnTitles, isEmptyCards) {
+            const card = [];
+            const centerIndex = Math.floor(size / 2);
+            
+            if (isEmptyCards) {
+                for (let col = 0; col < size; col++) {
+                    const columnValues = [];
+                    const requiredRows = (size % 2 !== 0 && col === centerIndex && centerOption !== 'number') ? size - 1 : size; 
+                    
+                    for (let i = 0; i < requiredRows; i++) {
+                        columnValues.push('');
+                    }
+                    card.push(columnValues);
+                }
+            } else {
+                
+                let ranges = [];
+                const cols = size;
+                const numbersPerCol = Math.floor(maxNum / cols);
+                const remainder = maxNum % cols;
+                let currentMin = 1;
+
+                for (let i = 0; i < cols; i++) {
+                    let currentMax = currentMin + numbersPerCol - 1;
+                    if (i < remainder) {
+                        currentMax++; 
+                    }
+                    ranges.push({ min: currentMin, max: currentMax });
+                    currentMin = currentMax + 1;
+                }
+
+                for (let col = 0; col < size; col++) {
+                    const range = ranges[col];
+                    const numbers = [];
+                    const requiredRows = (size % 2 !== 0 && col === centerIndex && centerOption !== 'number') ? size - 1 : size; 
+                    
+                    let possibleNumbers = [];
+                    for (let num = range.min; num <= range.max; num++) {
+                        possibleNumbers.push(num);
+                    }
+
+                    for (let i = 0; i < requiredRows; i++) {
+                        if (possibleNumbers.length === 0) break;
+                        const randomIndex = Math.floor(Math.random() * possibleNumbers.length);
+                        const selectedNum = possibleNumbers.splice(randomIndex, 1)[0];
+                        numbers.push(selectedNum);
+                    }
+
+                    numbers.sort((a, b) => a - b);
+                    card.push(numbers);
+                }
+            }
+
+            if (size % 2 !== 0 && centerOption !== 'number') {
+                const centerCol = card[centerIndex];
+                const centerRowIndex = Math.floor(size / 2);
+
+                if (centerOption === 'free') {
+                    centerCol.splice(centerRowIndex, 0, 'FREE');
+                } else if (centerOption === 'blank') {
+                    centerCol.splice(centerRowIndex, 0, '');
+                }
+            }
+            
+            const finalCardMatrix = [];
+            for (let row = 0; row < size; row++) {
+                const newRow = [];
+                for (let col = 0; col < size; col++) {
+                    newRow.push(card[col] && card[col][row] !== undefined ? card[col][row] : '');
+                }
+                finalCardMatrix.push(newRow);
+            }
+
+            return { matrix: finalCardMatrix, titles: columnTitles };
+        }
+
+
+        // --- לוגיקת רינדור HTML (נשאר ללא שינוי מהותי) ---
+
+        function renderCardHTML(cardData, cardIndex) {
+            const titles = cardData.titles;
+            const size = titles.length;
+            
+            const cellWidthPercent = (100 / size); 
+            const cardTitleText = `${getTranslation('cardTitle')} ${cardIndex}`;
+
+            const titlesToUse = currentLang === 'he' ? titles.slice().reverse() : titles;
+            const matrixToUse = currentLang === 'he' ? cardData.matrix.map(row => row.slice().reverse()) : cardData.matrix;
+
+
+            const cardTitleHtml = `<div class="p-3 text-center bg-gray-700 text-white font-bold text-xl rounded-t-lg">${cardTitleText}</div>`;
+
+            let html = `
+                <div class="bingo-card shadow-xl transition hover:shadow-2xl" dir="${currentLang === 'he' ? 'rtl' : 'ltr'}">
+                    ${cardTitleHtml}
+                    <table class="bingo-table">
+                        <thead>
+                            <tr>
+                                ${titlesToUse.map(title => `<th style="width: ${cellWidthPercent}%; background-color: var(--header-color);">${title}</th>`).join('')}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${matrixToUse.map(row => `
+                                <tr>
+                                    ${row.map(cell => {
+                                        const isFree = cell === 'FREE';
+                                        const cellClass = isFree ? 'free-cell' : 'text-gray-800';
+                                        return `<td class="${cellClass}" style="width: ${cellWidthPercent}%;">${cell}</td>`;
+                                    }).join('')}
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            return html;
+        }
+
+        function generateAllCards() {
+            clearOutput(); 
+            hideCustomError();
+            
+            const size = parseInt(document.getElementById('boardSize').value);
+            const isEmptyCards = document.getElementById('emptyCardsOption').value === 'yes'; 
+
+            const currentInputs = document.getElementById('columnInputsContainer').children.length;
+            if (currentInputs !== size) {
+                updateColumnInputs(); 
+            }
+
+            const maxNumber = validateMaxNumber(); 
+            const centerOption = document.getElementById('centerOption').value;
+            const totalCards = parseInt(document.getElementById('totalCards').value);
+            const cardsPerPage = parseInt(document.getElementById('cardsPerPage').value);
+            const headerColor = document.getElementById('headerColor').value;
+            
+            updateGlobalColor(headerColor);
+            
+            const columnTitles = [];
+            for (let i = 0; i < size; i++) {
+                const inputElement = document.getElementById(`colTitle${i}`);
+                
+                if (!inputElement) {
+                    // Fallback to default titles if elements not loaded correctly
+                    let defaultTitles;
+                    if (size === 5) defaultTitles = ['B', 'I', 'N', 'G', 'O'];
+                    else if (size === 4) defaultTitles = ['B', 'I', 'N', 'G'];
+                    else if (size === 3) defaultTitles = ['B', 'N', 'G'];
+                    
+                    columnTitles.push(defaultTitles[i] || `Col ${i+1}`);
+                    continue;
+                }
+                
+                const title = inputElement.value.trim();
+                if (title === '') {
+                    showCustomError(`${getTranslation('errColTitleEmpty')} ${i + 1} ${getTranslation('errCannotBeEmpty')}`);
+                    return;
+                }
+                columnTitles.push(title);
+            }
+
+            if (!isEmptyCards) {
+                const requiredNumbers = size * size;
+                const maxPossibleNumbers = maxNumber;
+                
+                let actualRequired = requiredNumbers;
+                if (size % 2 !== 0 && centerOption !== 'number') {
+                    actualRequired--;
+                }
+                
+                if (actualRequired > maxPossibleNumbers) {
+                    showCustomError(`${getTranslation('errRangeTooSmall1')} ${maxNumber}${getTranslation('errRangeTooSmall2')} ${size}x${size}${getTranslation('errRangeTooSmall3')} ${actualRequired} ${getTranslation('errRangeTooSmall4')}`);
+                    return;
+                }
+            }
+
+
+            let generatedCards = [];
+            for (let i = 1; i <= totalCards; i++) {
+                generatedCards.push(createSingleCardData(size, maxNumber, centerOption, columnTitles, isEmptyCards));
+            }
+            cardsCache = generatedCards; 
+            lastSettings = { cardsPerPage: cardsPerPage, headerColor: headerColor };
+
+            renderCardsToOutput(generatedCards, cardsPerPage);
+        }
+
+        function renderCardsToOutput(cards, cardsPerPage) {
+            const outputContainer = document.getElementById('output-container');
+            const initialMessage = document.getElementById('initial-message');
+            const printControls = document.getElementById('print-controls');
+            
+            initialMessage.classList.add('hidden');
+            outputContainer.innerHTML = ''; 
+
+            let currentPageCardsHtml = '';
+            cards.forEach((cardData, index) => {
+                const cardIndex = index + 1;
+                
+                currentPageCardsHtml += renderCardHTML(cardData, cardIndex);
+                
+                const isEndOfPage = cardIndex % cardsPerPage === 0;
+                const isLastCard = cardIndex === cards.length;
+
+                if (isEndOfPage || isLastCard) {
+                    const pageWrapper = document.createElement('div');
+                    pageWrapper.className = `print-page-wrapper cards-per-page-${cardsPerPage}`;
+                    pageWrapper.innerHTML = currentPageCardsHtml;
+                    outputContainer.appendChild(pageWrapper);
+
+                    if (!isLastCard) {
+                        const breakElement = document.createElement('div');
+                        breakElement.className = 'page-break-after-group';
+                        breakElement.textContent = `${getTranslation('pageBreakText')} ${cardIndex / cardsPerPage} --- `;
+                        outputContainer.appendChild(breakElement);
+                    }
+                    
+                    currentPageCardsHtml = ''; 
+                }
+            });
+
+            printControls.classList.remove('hidden');
+        }
+
+        // --- הדפסה (נשאר ללא שינוי) ---
+
+        function printCards() {
+            if (cardsCache && cardsCache.length > 0) {
+                const cardsPerPage = parseInt(document.getElementById('cardsPerPage').value);
+                
+                renderCardsToOutput(cardsCache, cardsPerPage); 
+                
+                window.print();
+            } else {
+                 showCustomError(getTranslation('errNoCardsToPrint'));
+            }
+        }
+
+        // --- אתחול (נשאר ללא שינוי מהותי) ---
+        
+        // פונקציה להעברת האלמנטים המרכזיים לתוך עוטף ה-Desktop החדש
+        function wrapContentForDesktopLayout() {
+            const wrapper = document.getElementById('desktop-layout-wrapper');
+            const mainContentColumn = document.getElementById('main-content-column');
+            const adColumnLeft = document.getElementById('ad-column-left');
+            const adColumnRight = document.getElementById('ad-column-right');
+
+            // העברת העמודות לתוך ה-wrapper הראשי
+            wrapper.appendChild(adColumnLeft);
+            wrapper.appendChild(mainContentColumn);
+            wrapper.appendChild(adColumnRight);
+        }
+
+        // הפעלת פונקציות האתחול
+        window.onload = function() {
+            updateColumnInputs(); 
+            updateGlobalColor(document.getElementById('headerColor').value);
+            toggleMaxNumberInput(); 
+            wrapContentForDesktopLayout(); // קריאה לפונקציה החדשה
+            
+            // הגדרת טקסט הכפתור ומיקומו בהתאם לשפה הנוכחית
+            const langButton = document.getElementById('lang-button');
+            const langButtonWrapper = document.getElementById('lang-button-wrapper');
+
+            if (currentLang === 'en') {
+                // אתחול כ-EN
+                langButton.textContent = TRANSLATIONS.he.buttonToHebrew; 
+                langButtonWrapper.classList.remove('justify-start');
+                langButtonWrapper.classList.add('justify-end');
+            } else {
+                // אתחול כ-HE (ברירת מחדל)
+                langButton.textContent = TRANSLATIONS.he.buttonToEnglish; 
+                langButtonWrapper.classList.remove('justify-end');
+                langButtonWrapper.classList.add('justify-start');
+            }
+        };
+    </script>
+</body>
+</html>
