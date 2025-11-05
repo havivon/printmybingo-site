@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <meta name="description" content="מחולל כרטיסי בינגו מותאם אישית בחינם (FREE). צרו כרטיסי בינגו מספרים או ריקים בכל גודל (3x3, 4x4, 5x5), עם טווח מספרים לבחירתכם, וכותרות עמודות מותאמות אישית. קל ונוח להדפסה כ-PDF.">
-    <meta name="description" lang="en" content="Free custom Bingo card generator (FREE). Create numbered or blank bingo cards in any size (3x3, 4x4, 5x5) with adjustable number range and custom column titles. Easy to print as PDF.">
+    <meta name="description" lang="en" content="Free custom Bingo card generator. Create numbered or blank bingo cards in any size (3x3, 4x4, 5x5) with adjustable number range and custom column titles. Easy to print as PDF.">
     
     <meta name="keywords" content="מחולל בינגו חינם, כרטיסי בינגו להדפסה, יצירת בינגו מספרים, בינגו ריק להדפסה, בינגו 5x5, מחולל כרטיסים, custom bingo generator free">
     <meta name="keywords" lang="en" content="free bingo card generator, custom bingo maker, printable bingo cards, number bingo, blank bingo cards, bingo 5x5, custom column titles, free bingo game">
@@ -413,7 +413,7 @@
     
     <script>
         
-        // --- מערך תרגומים (נשאר ללא שינוי מהותי) ---
+        // --- מערך תרגומים (ללא שינוי) ---
         const TRANSLATIONS = {
             he: {
                 // כללי
@@ -459,7 +459,7 @@
             },
             en: {
                 // General
-                appTitle: 'Custom Bingo Card Generator',
+                appTitle: 'Free Custom Bingo Card Generator',
                 buttonToEnglish: 'English',
                 buttonToHebrew: 'עברית',
                 credit: 'created by havivon',
@@ -502,27 +502,18 @@
         };
 
         // --- גלובליים ---
-        let currentLang = 'he'; // מתחיל בעברית
+        let currentLang; // כבר לא מאותחל ל-'he'
         let cardsCache = null; 
         let lastSettings = {}; 
 
-        // --- פונקציות תרגום (נשאר ללא שינוי) ---
+        // --- פונקציות תרגום ו-UI בסיסיות ---
 
-        function translateElement(element, key) {
-            const translation = TRANSLATIONS[currentLang][key];
-            if (element.tagName === 'INPUT' || element.tagName === 'BUTTON') {
-                element.value = translation;
-            } else {
-                element.textContent = translation;
-            }
-        }
-        
         function getTranslation(key) {
             return TRANSLATIONS[currentLang][key];
         }
 
-        function switchLanguage() {
-            currentLang = currentLang === 'he' ? 'en' : 'he';
+        // פונקציה המיישמת את כל התרגומים ועדכוני כיוון
+        function applyTranslations() {
             const newDir = currentLang === 'he' ? 'rtl' : 'ltr';
             
             // עדכון כיוון ושפת המסמך
@@ -530,17 +521,15 @@
             document.documentElement.setAttribute('dir', newDir);
             document.body.classList.toggle('en', currentLang === 'en');
             
-            // עדכון כפתור השפה (התיקון העיקרי)
+            // עדכון כפתור השפה
             const langButton = document.getElementById('lang-button');
             const langButtonWrapper = document.getElementById('lang-button-wrapper');
-
+            
             if (currentLang === 'en') {
-                 // האתר באנגלית (LTR) -> הכפתור צריך להראות 'עברית' ויוצג בצד ימין (justify-end)
                 langButton.textContent = TRANSLATIONS.he.buttonToHebrew; 
                 langButtonWrapper.classList.remove('justify-start');
                 langButtonWrapper.classList.add('justify-end');
             } else {
-                // האתר בעברית (RTL) -> הכפתור צריך להראות 'English' ויוצג בצד שמאל (justify-start)
                 langButton.textContent = TRANSLATIONS.he.buttonToEnglish; 
                 langButtonWrapper.classList.remove('justify-end');
                 langButtonWrapper.classList.add('justify-start');
@@ -551,17 +540,18 @@
                 const key = element.getAttribute('data-i18n');
                 const translation = TRANSLATIONS[currentLang][key];
                 
-                if (element.tagName === 'INPUT' && element.type !== 'submit' && element.type !== 'button') {
-                    // אין צורך לתרגם INPUTs רגילים
-                } else if (element.tagName === 'OPTION') {
-                     // עבור אפשרויות, אנו משתמשים במאפיין data-i18n על ה-OPTION עצמו
-                     element.textContent = translation;
-                } else if (key && translation) {
-                    element.textContent = translation;
+                if (key && translation) {
+                    if (element.tagName === 'OPTION') {
+                         element.textContent = translation;
+                    } else if (element.tagName === 'TITLE') {
+                         // מונע עדכון כותרת (Title) של הדף כדי שיישארו שם ה-SEO
+                    } else {
+                        element.textContent = translation;
+                    }
                 }
             });
             
-            // עדכון רכיבים תלויים שאינם מכוסים ע"י data-i18n (כותרות עמודות, שגיאות)
+            // עדכון רכיבים תלויים שאינם מכוסים ע"י data-i18n 
             updateColumnInputs();
             hideCustomError();
             
@@ -570,9 +560,20 @@
                  renderCardsToOutput(cardsCache, parseInt(document.getElementById('cardsPerPage').value));
             }
         }
-        
 
-        // --- פונקציות עזר כלליות (נשאר ללא שינוי) ---
+        // --- פונקציות שפה (מעודכנות) ---
+        
+        function initializeLanguage(lang) {
+             currentLang = lang;
+             applyTranslations();
+        }
+
+        function switchLanguage() {
+            currentLang = currentLang === 'he' ? 'en' : 'he';
+            applyTranslations();
+        }
+
+        // --- פונקציות עזר כלליות (ללא שינוי מהותי) ---
 
         function clearOutput() {
             const outputContainer = document.getElementById('output-container');
@@ -596,8 +597,6 @@
             document.getElementById('error-message').classList.add('hidden');
         }
 
-        // --- בקרת קלט וצבע (נשאר ללא שינוי) ---
-        
         function toggleMaxNumberInput() {
             const isChecked = document.getElementById('emptyCardsOption').value === 'yes';
             const maxNumberInput = document.getElementById('maxNumberInput');
@@ -700,7 +699,7 @@
             clearOutput(); 
         }
 
-        // --- לוגיקת יצירת כרטיסים (נשאר ללא שינוי) ---
+        // --- לוגיקת יצירת כרטיסים (ללא שינוי) ---
 
         function createSingleCardData(size, maxNum, centerOption, columnTitles, isEmptyCards) {
             const card = [];
@@ -779,7 +778,7 @@
         }
 
 
-        // --- לוגיקת רינדור HTML (נשאר ללא שינוי מהותי) ---
+        // --- לוגיקת רינדור HTML (ללא שינוי מהותי) ---
 
         function renderCardHTML(cardData, cardIndex) {
             const titles = cardData.titles;
@@ -926,7 +925,7 @@
             printControls.classList.remove('hidden');
         }
 
-        // --- הדפסה (נשאר ללא שינוי) ---
+        // --- הדפסה (ללא שינוי) ---
 
         function printCards() {
             if (cardsCache && cardsCache.length > 0) {
@@ -940,7 +939,7 @@
             }
         }
 
-        // --- אתחול (נשאר ללא שינוי מהותי) ---
+        // --- אתחול (מעודכן) ---
         
         // פונקציה להעברת האלמנטים המרכזיים לתוך עוטף ה-Desktop החדש
         function wrapContentForDesktopLayout() {
@@ -957,26 +956,25 @@
 
         // הפעלת פונקציות האתחול
         window.onload = function() {
-            updateColumnInputs(); 
+            // זיהוי שפת הדפדפן
+            const userLang = (navigator.language || navigator.userLanguage).toLowerCase();
+            let initialLang = 'en'; // ברירת מחדל לאנגלית (בינלאומי)
+
+            // בדיקה האם המשתמש דובר עברית
+            if (userLang.startsWith('he')) {
+                initialLang = 'he';
+            }
+            
+            // אתחול האתר כולל הצבעים והפריסה
             updateGlobalColor(document.getElementById('headerColor').value);
             toggleMaxNumberInput(); 
-            wrapContentForDesktopLayout(); // קריאה לפונקציה החדשה
-            
-            // הגדרת טקסט הכפתור ומיקומו בהתאם לשפה הנוכחית
-            const langButton = document.getElementById('lang-button');
-            const langButtonWrapper = document.getElementById('lang-button-wrapper');
+            wrapContentForDesktopLayout(); 
 
-            if (currentLang === 'en') {
-                // אתחול כ-EN
-                langButton.textContent = TRANSLATIONS.he.buttonToHebrew; 
-                langButtonWrapper.classList.remove('justify-start');
-                langButtonWrapper.classList.add('justify-end');
-            } else {
-                // אתחול כ-HE (ברירת מחדל)
-                langButton.textContent = TRANSLATIONS.he.buttonToEnglish; 
-                langButtonWrapper.classList.remove('justify-end');
-                langButtonWrapper.classList.add('justify-start');
-            }
+            // הפעלת לוגיקת השפה
+            initializeLanguage(initialLang);
+
+            // איפוס תצוגת הכותרות לאחר עדכון השפה הראשוני
+            updateColumnInputs(); 
         };
     </script>
 </body>
