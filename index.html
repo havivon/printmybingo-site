@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3331316001689042"
+          crossorigin="anonymous"></script>
     <meta name="description" content="מחולל כרטיסי בינגו מותאם אישית בחינם (FREE). צרו כרטיסי בינגו מספרים או ריקים בכל גודל (3x3, 4x4, 5x5), עם טווח מספרים לבחירתכם, וכותרות עמודות מותאמות אישית. קל ונוח להדפסה כ-PDF.">
-    <meta name="description" lang="en" content="Free custom Bingo card generator. Create numbered or blank bingo cards in any size (3x3, 4x4, 5x5) with adjustable number range and custom column titles. Easy to print as PDF.">
+    <meta name="description" lang="en" content="Free custom Bingo card generator (FREE). Create numbered or blank bingo cards in any size (3x3, 4x4, 5x5) with adjustable number range and custom column titles. Easy to print as PDF.">
     
     <meta name="keywords" content="מחולל בינגו חינם, כרטיסי בינגו להדפסה, יצירת בינגו מספרים, בינגו ריק להדפסה, בינגו 5x5, מחולל כרטיסים, custom bingo generator free">
     <meta name="keywords" lang="en" content="free bingo card generator, custom bingo maker, printable bingo cards, number bingo, blank bingo cards, bingo 5x5, custom column titles, free bingo game">
@@ -235,40 +237,28 @@
             }
         }
         
-        /* --- עיצוב בלוק פרסומת (לצורך הדמיה) --- */
-        .ad-placeholder {
-            background-color: #ffe4e6; /* ורוד בהיר */
-            border: 1px dashed #f43f5e; /* אדום */
-            color: #f43f5e;
-            text-align: center;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 1rem 0; /* מרווח אנכי במובייל */
-            width: 100%;
-        }
+        /* --- סגנון מיקומי הפרסומות --- */
         
-        /* Ad 1 - באנר רחב */
+        /* Ad 1 - באנר רחב: אוטומטי ורספונסיבי */
         #ad-unit-1 {
-             height: 90px;
              max-width: 728px;
              margin: 1rem auto;
         }
         
-        /* Ad 2 - מלבן מרכזי */
+        /* Ad 2 - מלבן מרכזי: אוטומטי ורספונסיבי */
         #ad-unit-2 {
-             height: 280px;
              max-width: 336px;
              margin: 1rem auto;
         }
         
         /* Ad 3 & 4 - עמודות צד אנכיות (מוסתרות במובייל) */
         @media (min-width: 768px) {
-            #ad-column-left .ad-placeholder, #ad-column-right .ad-placeholder {
-                height: 600px; /* גודל סטנדרטי למודעת צד */
-                max-width: 200px;
-                margin: 0; /* ללא מרווח אנכי מיותר ב-Desktop */
+            #ad-column-left, #ad-column-right {
+                /* נותן גובה למיקום הצדדי - מומלץ 600px או יותר */
+                min-height: 600px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
             }
         }
 
@@ -278,11 +268,15 @@
 <body class="bg-gray-100 p-4 md:p-0">
 
     <div id="ad-column-left" class="hidden md:block">
-        <div id="ad-unit-3" class="ad-placeholder">
-            מודעת צד 3 (300x600 / 160x600)
-            <br>
-            **מחשב שולחני בלבד**
-        </div>
+        <ins class="adsbygoogle"
+             style="display:block; min-width:160px; height:600px; margin: 0 auto;"
+             data-ad-client="ca-pub-3331316001689042"
+             data-ad-slot="YOUR_AD_SLOT_ID_3" 
+             data-ad-format="vertical"
+             data-full-width-responsive="false"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
     </div>
     
     <div id="main-content-column">
@@ -295,10 +289,16 @@
 
             <h1 class="text-3xl md:text-4xl font-bold text-center text-blue-800 mb-8" data-i18n="appTitle">מחולל כרטיסי בינגו</h1>
 
-            <div id="ad-unit-1" class="ad-placeholder">
-                מודעת באנר 1 (728x90)
-                <br>
-                **מעל כפתורי הבקרה**
+            <div id="ad-unit-1">
+                <ins class="adsbygoogle"
+                     style="display:block; text-align:center;"
+                     data-ad-client="ca-pub-3331316001689042"
+                     data-ad-slot="YOUR_AD_SLOT_ID_1"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
             </div>
             
             <div id="controls" class="bg-white p-6 md:p-8 rounded-xl shadow-lg mb-8">
@@ -381,10 +381,16 @@
                 <p class="text-center text-xs text-gray-400 mt-4" data-i18n="credit">created by havivon</p>
             </div>
 
-            <div id="ad-unit-2" class="ad-placeholder">
-                מודעת מלבן 2 (336x280 / 300x250)
-                <br>
-                **לפני הפלט**
+            <div id="ad-unit-2">
+                <ins class="adsbygoogle"
+                     style="display:block; text-align:center;"
+                     data-ad-client="ca-pub-3331316001689042"
+                     data-ad-slot="YOUR_AD_SLOT_ID_2"
+                     data-ad-format="rectangle"
+                     data-full-width-responsive="false"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
             </div>
             
             <div id="print-controls" class="bg-white p-6 md:p-8 rounded-xl shadow-lg mb-8 text-center hidden">
@@ -401,11 +407,15 @@
         
     </div>
     <div id="ad-column-right" class="hidden md:block">
-        <div id="ad-unit-4" class="ad-placeholder">
-            מודעת צד 4 (300x600 / 160x600)
-            <br>
-            **מחשב שולחני בלבד**
-        </div>
+        <ins class="adsbygoogle"
+             style="display:block; min-width:160px; height:600px; margin: 0 auto;"
+             data-ad-client="ca-pub-3331316001689042"
+             data-ad-slot="YOUR_AD_SLOT_ID_4"
+             data-ad-format="vertical"
+             data-full-width-responsive="false"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
     </div>
     
     <div id="desktop-layout-wrapper">
@@ -459,7 +469,7 @@
             },
             en: {
                 // General
-                appTitle: 'Free Custom Bingo Card Generator',
+                appTitle: 'Custom Bingo Card Generator (FREE)',
                 buttonToEnglish: 'English',
                 buttonToHebrew: 'עברית',
                 credit: 'created by havivon',
