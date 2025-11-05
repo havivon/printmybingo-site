@@ -245,7 +245,7 @@
              margin: 1rem auto;
         }
         
-        /* Ad 2 - מלבן מרכזי: אוטומטי ורספונסיבי */
+        /* Ad 2 - מלבן מרכזי/באנר תחתון: אוטומטי ורספונסיבי */
         #ad-unit-2 {
              max-width: 336px;
              margin: 1rem auto;
@@ -258,11 +258,9 @@
                 min-height: 600px;
                 display: flex;
                 flex-direction: column;
-                justify-content: center;
+                justify-content: flex-start; /* ממקם אותם בחלק העליון */
             }
         }
-
-
     </style>
 </head>
 <body class="bg-gray-100 p-4 md:p-0">
@@ -271,7 +269,7 @@
         <ins class="adsbygoogle"
              style="display:block; min-width:160px; height:600px; margin: 0 auto;"
              data-ad-client="ca-pub-3331316001689042"
-             data-ad-slot="YOUR_AD_SLOT_ID_3" 
+             data-ad-slot="2035743228" 
              data-ad-format="vertical"
              data-full-width-responsive="false"></ins>
         <script>
@@ -293,7 +291,7 @@
                 <ins class="adsbygoogle"
                      style="display:block; text-align:center;"
                      data-ad-client="ca-pub-3331316001689042"
-                     data-ad-slot="YOUR_AD_SLOT_ID_1"
+                     data-ad-slot="6713247032"
                      data-ad-format="auto"
                      data-full-width-responsive="true"></ins>
                 <script>
@@ -385,7 +383,7 @@
                 <ins class="adsbygoogle"
                      style="display:block; text-align:center;"
                      data-ad-client="ca-pub-3331316001689042"
-                     data-ad-slot="YOUR_AD_SLOT_ID_2"
+                     data-ad-slot="2241140247"
                      data-ad-format="rectangle"
                      data-full-width-responsive="false"></ins>
                 <script>
@@ -410,7 +408,7 @@
         <ins class="adsbygoogle"
              style="display:block; min-width:160px; height:600px; margin: 0 auto;"
              data-ad-client="ca-pub-3331316001689042"
-             data-ad-slot="YOUR_AD_SLOT_ID_4"
+             data-ad-slot="5228774979"
              data-ad-format="vertical"
              data-full-width-responsive="false"></ins>
         <script>
@@ -418,12 +416,12 @@
         </script>
     </div>
     
-    <div id="desktop-layout-wrapper">
+    <div id="desktop-layout-wrapper" class="p-4 md:p-0">
         </div>
     
     <script>
         
-        // --- מערך תרגומים (ללא שינוי) ---
+        // --- מערך תרגומים (כפי שסופק) ---
         const TRANSLATIONS = {
             he: {
                 // כללי
@@ -469,7 +467,7 @@
             },
             en: {
                 // General
-                appTitle: 'Custom Bingo Card Generator (FREE)',
+                appTitle: 'Custom Bingo Card Generator',
                 buttonToEnglish: 'English',
                 buttonToHebrew: 'עברית',
                 credit: 'created by havivon',
@@ -512,7 +510,7 @@
         };
 
         // --- גלובליים ---
-        let currentLang; // כבר לא מאותחל ל-'he'
+        let currentLang = 'he'; // מתחיל בעברית
         let cardsCache = null; 
         let lastSettings = {}; 
 
@@ -522,8 +520,8 @@
             return TRANSLATIONS[currentLang][key];
         }
 
-        // פונקציה המיישמת את כל התרגומים ועדכוני כיוון
-        function applyTranslations() {
+        function switchLanguage() {
+            currentLang = currentLang === 'he' ? 'en' : 'he';
             const newDir = currentLang === 'he' ? 'rtl' : 'ltr';
             
             // עדכון כיוון ושפת המסמך
@@ -534,7 +532,7 @@
             // עדכון כפתור השפה
             const langButton = document.getElementById('lang-button');
             const langButtonWrapper = document.getElementById('lang-button-wrapper');
-            
+
             if (currentLang === 'en') {
                 langButton.textContent = TRANSLATIONS.he.buttonToHebrew; 
                 langButtonWrapper.classList.remove('justify-start');
@@ -554,14 +552,14 @@
                     if (element.tagName === 'OPTION') {
                          element.textContent = translation;
                     } else if (element.tagName === 'TITLE') {
-                         // מונע עדכון כותרת (Title) של הדף כדי שיישארו שם ה-SEO
+                         // מונע עדכון כותרת (Title) של הדף
                     } else {
                         element.textContent = translation;
                     }
                 }
             });
             
-            // עדכון רכיבים תלויים שאינם מכוסים ע"י data-i18n 
+            // עדכון רכיבים תלויים
             updateColumnInputs();
             hideCustomError();
             
@@ -570,20 +568,8 @@
                  renderCardsToOutput(cardsCache, parseInt(document.getElementById('cardsPerPage').value));
             }
         }
-
-        // --- פונקציות שפה (מעודכנות) ---
         
-        function initializeLanguage(lang) {
-             currentLang = lang;
-             applyTranslations();
-        }
-
-        function switchLanguage() {
-            currentLang = currentLang === 'he' ? 'en' : 'he';
-            applyTranslations();
-        }
-
-        // --- פונקציות עזר כלליות (ללא שינוי מהותי) ---
+        // --- פונקציות עזר כלליות ---
 
         function clearOutput() {
             const outputContainer = document.getElementById('output-container');
@@ -709,7 +695,7 @@
             clearOutput(); 
         }
 
-        // --- לוגיקת יצירת כרטיסים (ללא שינוי) ---
+        // --- לוגיקת יצירת כרטיסים ---
 
         function createSingleCardData(size, maxNum, centerOption, columnTitles, isEmptyCards) {
             const card = [];
@@ -788,7 +774,7 @@
         }
 
 
-        // --- לוגיקת רינדור HTML (ללא שינוי מהותי) ---
+        // --- לוגיקת רינדור HTML ---
 
         function renderCardHTML(cardData, cardIndex) {
             const titles = cardData.titles;
@@ -935,7 +921,7 @@
             printControls.classList.remove('hidden');
         }
 
-        // --- הדפסה (ללא שינוי) ---
+        // --- הדפסה ---
 
         function printCards() {
             if (cardsCache && cardsCache.length > 0) {
@@ -948,43 +934,65 @@
                  showCustomError(getTranslation('errNoCardsToPrint'));
             }
         }
-
-        // --- אתחול (מעודכן) ---
         
-        // פונקציה להעברת האלמנטים המרכזיים לתוך עוטף ה-Desktop החדש
+        // --- פונקציות אתחול פריסת דסקטופ ---
+        
         function wrapContentForDesktopLayout() {
             const wrapper = document.getElementById('desktop-layout-wrapper');
-            const mainContentColumn = document.getElementById('main-content-column');
-            const adColumnLeft = document.getElementById('ad-column-left');
-            const adColumnRight = document.getElementById('ad-column-right');
+            
+            // תופסים את האלמנטים הנמצאים כרגע בתוך ה-<body>
+            const bodyChildren = document.body.children;
+            
+            // מכניסים אותם למערך (כדי שנוכל לשלוט על הסדר)
+            const elementsToMove = [
+                document.getElementById('ad-column-left'),
+                document.getElementById('main-content-column'),
+                document.getElementById('ad-column-right')
+            ];
 
-            // העברת העמודות לתוך ה-wrapper הראשי
-            wrapper.appendChild(adColumnLeft);
-            wrapper.appendChild(mainContentColumn);
-            wrapper.appendChild(adColumnRight);
+            // מרוקנים את ה-body מכל התוכן שנועד להיות בתוך הפריסה
+            // ומוודאים שכל שאר האלמנטים המיועדים לפריסה (כמו #desktop-layout-wrapper) נשארים ב-body.
+            
+            // מעבירים את הילדים לתוך ה-wrapper (שנמצא כבר ב-body)
+            elementsToMove.forEach(element => {
+                if(element) { 
+                    wrapper.appendChild(element);
+                }
+            });
+            
+            // מסירים את ה-p-4 שהיה על ה-body ומעבירים אותו ל-wrapper
+            document.body.classList.remove('p-4', 'md:p-8'); 
+            wrapper.classList.remove('p-4', 'md:p-0');
+            wrapper.classList.add('p-4', 'md:p-0'); 
         }
 
+        // --- אתחול סופי ---
+        
         // הפעלת פונקציות האתחול
         window.onload = function() {
-            // זיהוי שפת הדפדפן
-            const userLang = (navigator.language || navigator.userLanguage).toLowerCase();
-            let initialLang = 'en'; // ברירת מחדל לאנגלית (בינלאומי)
-
-            // בדיקה האם המשתמש דובר עברית
-            if (userLang.startsWith('he')) {
-                initialLang = 'he';
-            }
+            // מעבירים את האלמנטים לתוך עוטף הפריסה הראשי
+            wrapContentForDesktopLayout();
             
-            // אתחול האתר כולל הצבעים והפריסה
+            // שאר פונקציות האתחול
+            updateColumnInputs(); 
             updateGlobalColor(document.getElementById('headerColor').value);
             toggleMaxNumberInput(); 
-            wrapContentForDesktopLayout(); 
+            
+            // הגדרת טקסט הכפתור ומיקומו בהתאם לשפה הנוכחית
+            const langButton = document.getElementById('lang-button');
+            const langButtonWrapper = document.getElementById('lang-button-wrapper');
 
-            // הפעלת לוגיקת השפה
-            initializeLanguage(initialLang);
-
-            // איפוס תצוגת הכותרות לאחר עדכון השפה הראשוני
-            updateColumnInputs(); 
+            if (currentLang === 'en') {
+                // אתחול כ-EN
+                langButton.textContent = TRANSLATIONS.he.buttonToHebrew; 
+                langButtonWrapper.classList.remove('justify-start');
+                langButtonWrapper.classList.add('justify-end');
+            } else {
+                // אתחול כ-HE (ברירת מחדל)
+                langButton.textContent = TRANSLATIONS.he.buttonToEnglish; 
+                langButtonWrapper.classList.remove('justify-end');
+                langButtonWrapper.classList.add('justify-start');
+            }
         };
     </script>
 </body>
