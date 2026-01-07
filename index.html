@@ -250,14 +250,22 @@
 
         let currentLang = 'he';
 
+        // זיהוי שפה אוטומטי לפי מערכת ההפעלה/דפדפן
+        function detectLanguage() {
+            const browserLang = navigator.language || navigator.userLanguage;
+            if (browserLang.startsWith('en')) {
+                currentLang = 'en';
+            } else {
+                currentLang = 'he';
+            }
+            applyLanguage();
+        }
+
         function showSection(id) {
             document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active-section'));
             document.getElementById('section-' + id).classList.add('active-section');
-            
-            // עדכון הניווט הפעיל
             document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
             document.getElementById('nav-' + id).classList.add('active');
-            
             window.scrollTo(0, 0);
         }
 
@@ -295,7 +303,6 @@
             document.documentElement.style.setProperty('--header-color', val);
         }
 
-        // פונקציה לעדכון מיידי של פריסת ההדפסה מבלי לייצר מחדש
         function updatePrintLayout() {
             const val = document.getElementById('cardsPerPage').value;
             document.body.className = `print-${val}`;
@@ -367,7 +374,9 @@
         }
 
         function resetSettings() { location.reload(); }
-        applyLanguage();
+        
+        // הפעלת זיהוי שפה בטעינה
+        detectLanguage();
     </script>
 </body>
 </html>
