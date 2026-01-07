@@ -22,8 +22,8 @@
             letter-spacing: -1px;
         }
 
-        .nav-links { display: flex; gap: 2rem; }
-        .nav-link { color: #4b5563; transition: color 0.2s; font-weight: 400; }
+        .nav-links { display: flex; gap: 1.5rem; }
+        .nav-link { color: #4b5563; transition: color 0.2s; font-weight: 400; font-size: 0.95rem; }
         .nav-link.active { color: #1d4ed8; font-weight: 700; }
 
         #output-container {
@@ -96,6 +96,7 @@
             <div class="nav-links">
                 <button onclick="showSection('main')" id="nav-main" class="nav-link active" data-i18n="navHome">בית</button>
                 <button onclick="showSection('about')" id="nav-about" class="nav-link" data-i18n="navAbout">אודות</button>
+                <button onclick="showSection('terms')" id="nav-terms" class="nav-link" data-i18n="navTerms">תנאי שימוש</button>
                 <button onclick="showSection('contact')" id="nav-contact" class="nav-link" data-i18n="navContact">צור קשר</button>
             </div>
             <button id="lang-button" onclick="toggleLanguage()" class="text-sm px-4 py-1 border border-gray-300 rounded-md hover:bg-gray-50 transition">English</button>
@@ -170,7 +171,9 @@
                 </div>
             </div>
 
-            <div id="print-controls" class="hidden no-print text-center mb-10">
+            <div id="result-anchor" class="no-print"></div>
+            
+            <div id="print-controls" class="hidden no-print text-center mb-10 pt-4">
                 <button onclick="window.print()" class="bg-blue-600 text-white px-10 py-4 rounded-full font-bold text-lg shadow-xl hover:bg-blue-700" data-i18n="printButton">הדפסה / שמירה כ-PDF</button>
             </div>
 
@@ -188,6 +191,11 @@
             <div class="text-gray-700 leading-loose space-y-6" data-i18n="aboutContent"></div>
         </div>
 
+        <div id="section-terms" class="page-section bg-white p-10 rounded-2xl shadow-lg max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold mb-6 text-blue-800" data-i18n="termsTitle">תנאי שימוש</h2>
+            <div class="text-gray-700 leading-loose space-y-6" data-i18n="termsContent"></div>
+        </div>
+
         <div id="section-contact" class="page-section bg-white p-10 rounded-2xl shadow-lg text-center max-w-4xl mx-auto">
             <h2 class="text-3xl font-bold mb-6 text-blue-800" data-i18n="contactTitle">צור קשר</h2>
             <div class="text-gray-700 space-y-4" data-i18n="contactContent"></div>
@@ -202,7 +210,7 @@
         const TRANSLATIONS = {
             he: {
                 tagline: 'הדרך הקלה ליצירת כרטיסי בינגו להדפסה',
-                navHome: 'בית', navAbout: 'אודות', navContact: 'צור קשר',
+                navHome: 'בית', navAbout: 'אודות', navTerms: 'תנאי שימוש', navContact: 'צור קשר',
                 boardSizeLabel: 'גודל הטבלה', emptyCardsLabel: 'כרטיסיות ריקות', no: 'לא', yes: 'כן',
                 maxNumberLabel: 'טווח מספרים (1-90)', centerOptionLabel: 'משבצת מרכזית',
                 centerOptionNumber: 'מספר רגיל', centerOptionBlank: 'ריק', totalCardsLabel: 'סה"כ כרטיסים',
@@ -215,17 +223,23 @@
                              <p>תוכלו לבחור את גודל הלוח (3x3 לילדים קטנים או 5x5 למשחק קלאסי), לקבוע את טווח המספרים ואפילו לשנות את הכותרות לכל שם שתרצו (כמו B-I-N-G-O או שמות של חברים).</p>
                              <p>לאחר הלחיצה על "צור כרטיסים", האתר יפיק עבורכם לוחות ייחודיים שונים זה מזה. כל מה שנותר לכם לעשות הוא ללחוץ על כפתור ההדפסה ולבחור "שמור כ-PDF" או לשלוח ישירות למדפסת הביתית.</p>`,
                 aboutTitle: 'אודות PrintMyBingo',
-                aboutContent: `<p>ברוכים הבאים ל-PrintMyBingo, הכלי המוביל ברשת ליצירת כרטיסי בינגו מותאמים אישית בחינם. המשימה שלנו היא להפוך את תכנון הפעילות החברתית שלכם לפשוטה, נגישה ומהנה.</p>
-                               <p>בין אם אתם מורים המחפשים כלי עזר לימודי בכיתה, הורים המתכננים מסיבת יום הולדת, או מארגני אירועי גיבוש בחברות - המחולל שלנו נבנה במיוחד כדי לענות על הצרכים שלכם. אנו משתמשים באלגוריתם רנדומלי חכם המבטיח שכל כרטיס שנוצר הוא ייחודי ושונה מהשאר, מה שמבטיח משחק הוגן ומרגש בכל פעם מחדש.</p>
-                               <p>האתר שלנו תומך בהתאמה אישית מלאה: החל מבחירת גודל הלוח וטווח המספרים, ועד לשינוי כותרות העמודות ובחירת עיצוב צבעוני שמתאים לאווירה שלכם. הכל זמין להורדה מיידית כקובץ PDF או להדפסה ישירה.</p>`,
+                aboutContent: `<p>ברוכים הבאים ל-PrintMyBingo, הכלי המוביל ברשת ליצירת כרטיסי בינגו מותאמים אישית בחינם. המשימה שלנו היא להפוך את תכנון הפעילות החברתית שלכם לפשוטה, נגישה ומהנה.</p>`,
+                termsTitle: 'תנאי שימוש',
+                termsContent: `<p>ברוכים הבאים לאתר PrintMyBingo. השימוש באתר ובשירותים המוצעים בו כפוף לתנאים הבאים:</p>
+                               <ul class="list-disc list-inside space-y-2">
+                                 <li>האתר מופעל על ידי אדם פרטי כשירות חינמי לקהל הרחב.</li>
+                                 <li>השימוש בלוחות הבינגו הנוצרים באתר מיועד לשימוש אישי, חינוכי או חברתי בלבד.</li>
+                                 <li>אין להשתמש באתר למטרות בלתי חוקיות או להפיץ את התוכן בצורה מסחרית ללא אישור.</li>
+                                 <li>מפעיל האתר אינו נושא באחריות לכל נזק, ישיר או עקיף, העלול להיגרם כתוצאה מהשימוש באתר.</li>
+                                 <li>האתר מציג פרסומות (כגון Google AdSense).</li>
+                               </ul>`,
                 contactTitle: 'נשמח לשמוע מכם',
-                contactContent: `<p>יש לכם שאלה? זיהיתם באג? או אולי יש לכם רעיון לפיצ'ר חדש שיכול לשדרג את האתר? אנחנו ב-PrintMyBingo מעריכים מאוד את המשוב של המשתמשים שלנו.</p>
-                                 <p class="font-bold text-blue-600">צרו איתנו קשר במייל: havivontm@gmail.com</p>
+                contactContent: `<p>צרו איתנו קשר במייל: havivontm@gmail.com</p>
                                  <p>אנו משתדלים לענות לכל פנייה במהירות האפשרית. תודה שאתם משתמשים בכלי שלנו!</p>`
             },
             en: {
                 tagline: 'The easiest way to create printable bingo cards',
-                navHome: 'Home', navAbout: 'About', navContact: 'Contact',
+                navHome: 'Home', navAbout: 'About', navTerms: 'Terms', navContact: 'Contact',
                 boardSizeLabel: 'Board Size', emptyCardsLabel: 'Empty Cards', no: 'No', yes: 'Yes',
                 maxNumberLabel: 'Number Range (1-90)', centerOptionLabel: 'Center Cell',
                 centerOptionNumber: 'Number', centerOptionBlank: 'Blank', totalCardsLabel: 'Total Cards',
@@ -234,30 +248,28 @@
                 resetButton: 'Reset', printButton: 'Print / Save as PDF',
                 initialMessage: 'Set parameters and click "Generate" to start.',
                 seoTitle: 'How to use our Bingo Generator?',
-                seoContent: `<p>The game of Bingo is one of the most popular and enjoyable games for all ages. Our tool allows you to create high-quality printable bingo cards in just a few seconds.</p>
-                             <p>You can choose the board size (3x3 for small children or 5x5 for a classic game), set the range of numbers, and even change the titles to any name you want (like B-I-N-G-O or names of friends).</p>
-                             <p>After clicking "Generate Cards", the site will produce unique boards for you. All that remains for you to do is click the print button and select "Save as PDF" or send directly to your home printer.</p>`,
+                seoContent: `<p>Bingo is a fun game for all ages. Our tool helps you create cards in seconds.</p>`,
                 aboutTitle: 'About PrintMyBingo',
-                aboutContent: `<p>Welcome to PrintMyBingo, the web's leading tool for creating custom bingo cards for free. Our mission is to make your social activity planning simple, accessible, and fun.</p>
-                               <p>Whether you are a teacher looking for a classroom aid, a parent planning a birthday party, or an event organizer - our generator is built to meet your needs. We use a smart randomization algorithm that ensures every generated card is unique, guaranteeing a fair and exciting game every time.</p>
-                               <p>Our site supports full customization: from choosing board size and number ranges to changing column headers and selecting a color scheme that fits your vibe. Everything is available for immediate PDF download or direct printing.</p>`,
-                contactTitle: 'We\'d Love to Hear From You',
-                contactContent: `<p>Have a question? Spotted a bug? Or maybe you have an idea for a new feature? We at PrintMyBingo value our users' feedback immensely.</p>
-                                 <p class="font-bold text-blue-600">Contact us via email: havivontm@gmail.com</p>
-                                 <p>We try to answer all inquiries as soon as possible. Thank you for using our tool!</p>`
+                aboutContent: `<p>Welcome to PrintMyBingo, the web's leading tool for creating custom bingo cards for free.</p>`,
+                termsTitle: 'Terms of Use',
+                termsContent: `<p>Welcome to PrintMyBingo. By using this site, you agree to the following terms:</p>
+                               <ul class="list-disc list-inside space-y-2">
+                                 <li>This site is operated by a private individual as a free service.</li>
+                                 <li>The bingo cards are intended for personal, educational, or social use only.</li>
+                                 <li>Commercial redistribution without permission is prohibited.</li>
+                                 <li>The operator is not liable for any damages resulting from the use of this site.</li>
+                                 <li>This site displays advertisements (such as Google AdSense).</li>
+                               </ul>`,
+                contactTitle: 'Get in Touch',
+                contactContent: `<p>Email us at: havivontm@gmail.com</p>`
             }
         };
 
         let currentLang = 'he';
 
-        // זיהוי שפה אוטומטי לפי מערכת ההפעלה/דפדפן
         function detectLanguage() {
             const browserLang = navigator.language || navigator.userLanguage;
-            if (browserLang.startsWith('en')) {
-                currentLang = 'en';
-            } else {
-                currentLang = 'he';
-            }
+            currentLang = browserLang.startsWith('en') ? 'en' : 'he';
             applyLanguage();
         }
 
@@ -306,6 +318,31 @@
         function updatePrintLayout() {
             const val = document.getElementById('cardsPerPage').value;
             document.body.className = `print-${val}`;
+        }
+
+        // פונקציית גלילה איטית מותאמת אישית
+        function smoothScrollTo(element, duration) {
+            const targetPosition = element.getBoundingClientRect().top + window.pageYOffset;
+            const startPosition = window.pageYOffset;
+            const distance = targetPosition - startPosition;
+            let startTime = null;
+
+            function animation(currentTime) {
+                if (startTime === null) startTime = currentTime;
+                const timeElapsed = currentTime - startTime;
+                const run = ease(timeElapsed, startPosition, distance, duration);
+                window.scrollTo(0, run);
+                if (timeElapsed < duration) requestAnimationFrame(animation);
+            }
+
+            function ease(t, b, c, d) {
+                t /= d / 2;
+                if (t < 1) return c / 2 * t * t + b;
+                t--;
+                return -c / 2 * (t * (t - 2) - 1) + b;
+            }
+
+            requestAnimationFrame(animation);
         }
 
         function generateAllCards() {
@@ -371,11 +408,14 @@
                 cardDiv.innerHTML = tableHtml;
                 container.appendChild(cardDiv);
             }
+
+            // גלילה איטית יותר (1.2 שניות) לאזור הכרטיסים
+            setTimeout(() => {
+                smoothScrollTo(document.getElementById('result-anchor'), 1200);
+            }, 100);
         }
 
         function resetSettings() { location.reload(); }
-        
-        // הפעלת זיהוי שפה בטעינה
         detectLanguage();
     </script>
 </body>
