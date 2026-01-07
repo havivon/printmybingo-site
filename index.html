@@ -6,15 +6,25 @@
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3331316001689042" crossorigin="anonymous"></script>
     
-    <title data-i18n="appTitle">מחולל כרטיסי בינגו מותאם אישית בחינם</title>
+    <title>PrintMyBingo</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700&family=Fredoka+One&display=swap" rel="stylesheet">
     
     <style>
         :root { --header-color: #1d4ed8; }
         body { font-family: 'Heebo', sans-serif; background-color: #f3f4f6; }
         
+        .logo-text {
+            font-family: 'Fredoka One', cursive;
+            background: linear-gradient(to right, #1d4ed8, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
         .nav-links { display: flex; gap: 2rem; }
+        .nav-link { color: #4b5563; transition: color 0.2s; font-weight: 400; }
+        .nav-link.active { color: #1d4ed8; font-weight: 700; }
 
         #output-container {
             display: grid;
@@ -49,7 +59,6 @@
             font-size: 1.2rem;
             font-weight: 700;
         }
-        /* הבטחת צבע בהדפסה */
         .bingo-table th { 
             color: white !important; 
             background-color: var(--header-color) !important; 
@@ -67,55 +76,16 @@
         .page-section { display: none; }
         .active-section { display: block; }
 
-        /* הגדרות הדפסה מתוקנות */
         @media print {
             body { background: white; margin: 0; padding: 0; }
-            .no-print { display: none !important; } /* מעלים כותרות וכפתורים */
-            
-            #output-container { 
-                display: block !important; 
-                width: 100%;
-                margin: 0;
-                padding: 0;
-            }
-
-            .bingo-card { 
-                box-shadow: none; 
-                border: 2px solid black !important;
-                margin-left: auto;
-                margin-right: auto;
-                page-break-inside: avoid;
-            }
-            
-            /* הגדרה לכרטיס 1 בעמוד - מכריח דף חדש */
-            .print-1 .bingo-card { 
-                max-width: 80%; 
-                margin-top: 50px;
-                page-break-after: always; 
-            }
-            
-            /* הגדרה ל-2 כרטיסים בעמוד - גודל אופטימלי ל-A4 */
-            .print-2 .bingo-card { 
-                max-width: 70%; 
-                margin-bottom: 30px; 
-                margin-top: 20px;
-                /* לא מכריח page-break-after כדי שיכנסו שניים */
-            }
-
-            /* הגדרה ל-4 כרטיסים - גריד */
-            .print-4 #output-container { 
-                display: grid !important; 
-                grid-template-columns: 1fr 1fr; 
-                gap: 10mm;
-            }
-            .print-4 .bingo-card { 
-                max-width: 95%; 
-                font-size: 0.8em; /* הקטנת פונט קלה */
-            }
-            .print-4 .bingo-table th, .print-4 .bingo-table td {
-                height: 45px; /* הקטנת תאים */
-                font-size: 1rem;
-            }
+            .no-print { display: none !important; }
+            #output-container { display: block !important; width: 100%; margin: 0; padding: 0; }
+            .bingo-card { box-shadow: none; border: 2px solid black !important; margin-left: auto; margin-right: auto; page-break-inside: avoid; }
+            .print-1 .bingo-card { max-width: 80%; margin-top: 50px; page-break-after: always; }
+            .print-2 .bingo-card { max-width: 70%; margin-bottom: 30px; margin-top: 20px; }
+            .print-4 #output-container { display: grid !important; grid-template-columns: 1fr 1fr; gap: 10mm; }
+            .print-4 .bingo-card { max-width: 95%; font-size: 0.8em; }
+            .print-4 .bingo-table th, .print-4 .bingo-table td { height: 45px; font-size: 1rem; }
         }
     </style>
 </head>
@@ -124,20 +94,24 @@
     <nav class="bg-white shadow-sm no-print mb-4">
         <div class="max-w-7xl mx-auto px-4 flex justify-between items-center h-16">
             <div class="nav-links">
-                <button onclick="showSection('main')" class="font-bold text-blue-600" data-i18n="navHome">בית</button>
-                <button onclick="showSection('about')" class="text-gray-600 hover:text-blue-500" data-i18n="navAbout">אודות</button>
-                <button onclick="showSection('contact')" class="text-gray-600 hover:text-blue-500" data-i18n="navContact">צור קשר</button>
+                <button onclick="showSection('main')" id="nav-main" class="nav-link active" data-i18n="navHome">בית</button>
+                <button onclick="showSection('about')" id="nav-about" class="nav-link" data-i18n="navAbout">אודות</button>
+                <button onclick="showSection('contact')" id="nav-contact" class="nav-link" data-i18n="navContact">צור קשר</button>
             </div>
             <button id="lang-button" onclick="toggleLanguage()" class="text-sm px-4 py-1 border border-gray-300 rounded-md hover:bg-gray-50 transition">English</button>
         </div>
     </nav>
 
-    <div class="max-w-6xl mx-auto p-4" id="main-content">
+    <div class="max-w-6xl mx-auto p-4">
+
+        <div class="text-center mb-8 no-print">
+            <h1 class="text-5xl md:text-6xl font-bold logo-text py-2">Print My Bingo</h1>
+            <p class="text-gray-500 text-sm md:text-base mt-2" data-i18n="tagline">הדרך הקלה ליצירת כרטיסי בינגו להדפסה</p>
+        </div>
 
         <div id="section-main" class="page-section active-section">
-            <h1 class="text-3xl font-bold text-center text-gray-800 mb-8 no-print" data-i18n="appTitle">הגדרות יצירת כרטיסים</h1>
-
-            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-xl mb-10 no-print">
+            
+            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-xl mb-10 no-print max-w-4xl mx-auto">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div>
                         <label class="block text-sm font-bold text-gray-700 mb-2" data-i18n="boardSizeLabel">גודל הטבלה</label>
@@ -172,7 +146,7 @@
                     </div>
                     <div>
                         <label class="block text-sm font-bold text-gray-700 mb-2" data-i18n="cardsPerPageLabel">כרטיסים בעמוד</label>
-                        <select id="cardsPerPage" class="w-full p-3 border rounded-xl bg-gray-50">
+                        <select id="cardsPerPage" onchange="updatePrintLayout()" class="w-full p-3 border rounded-xl bg-gray-50">
                             <option value="2">2</option>
                             <option value="1">1</option>
                             <option value="4">4</option>
@@ -203,18 +177,18 @@
             <div id="output-container"></div>
             <p id="initial-message" class="text-center text-gray-400 py-20" data-i18n="initialMessage">בחר הגדרות ולחץ על "צור כרטיסי בינגו" כדי להתחיל.</p>
 
-            <div class="mt-20 p-8 bg-white rounded-2xl border border-gray-100 no-print shadow-sm">
+            <div class="mt-20 p-8 bg-white rounded-2xl border border-gray-100 no-print shadow-sm max-w-4xl mx-auto">
                 <h2 class="text-2xl font-bold mb-4" data-i18n="seoTitle">איך להשתמש במחולל הבינגו שלנו?</h2>
                 <div id="seo-content-area" class="text-gray-600 leading-relaxed space-y-4" data-i18n="seoContent"></div>
             </div>
         </div>
 
-        <div id="section-about" class="page-section bg-white p-10 rounded-2xl shadow-lg">
+        <div id="section-about" class="page-section bg-white p-10 rounded-2xl shadow-lg max-w-4xl mx-auto">
             <h2 class="text-3xl font-bold mb-6 text-blue-800" data-i18n="aboutTitle">אודות</h2>
             <div class="text-gray-700 leading-loose space-y-6" data-i18n="aboutContent"></div>
         </div>
 
-        <div id="section-contact" class="page-section bg-white p-10 rounded-2xl shadow-lg text-center">
+        <div id="section-contact" class="page-section bg-white p-10 rounded-2xl shadow-lg text-center max-w-4xl mx-auto">
             <h2 class="text-3xl font-bold mb-6 text-blue-800" data-i18n="contactTitle">צור קשר</h2>
             <div class="text-gray-700 space-y-4" data-i18n="contactContent"></div>
         </div>
@@ -227,7 +201,8 @@
     <script>
         const TRANSLATIONS = {
             he: {
-                appTitle: 'הגדרות יצירת כרטיסים', navHome: 'בית', navAbout: 'אודות', navContact: 'צור קשר',
+                tagline: 'הדרך הקלה ליצירת כרטיסי בינגו להדפסה',
+                navHome: 'בית', navAbout: 'אודות', navContact: 'צור קשר',
                 boardSizeLabel: 'גודל הטבלה', emptyCardsLabel: 'כרטיסיות ריקות', no: 'לא', yes: 'כן',
                 maxNumberLabel: 'טווח מספרים (1-90)', centerOptionLabel: 'משבצת מרכזית',
                 centerOptionNumber: 'מספר רגיל', centerOptionBlank: 'ריק', totalCardsLabel: 'סה"כ כרטיסים',
@@ -249,7 +224,8 @@
                                  <p>אנו משתדלים לענות לכל פנייה במהירות האפשרית. תודה שאתם משתמשים בכלי שלנו!</p>`
             },
             en: {
-                appTitle: 'Bingo Card Settings', navHome: 'Home', navAbout: 'About', navContact: 'Contact',
+                tagline: 'The easiest way to create printable bingo cards',
+                navHome: 'Home', navAbout: 'About', navContact: 'Contact',
                 boardSizeLabel: 'Board Size', emptyCardsLabel: 'Empty Cards', no: 'No', yes: 'Yes',
                 maxNumberLabel: 'Number Range (1-90)', centerOptionLabel: 'Center Cell',
                 centerOptionNumber: 'Number', centerOptionBlank: 'Blank', totalCardsLabel: 'Total Cards',
@@ -277,6 +253,11 @@
         function showSection(id) {
             document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active-section'));
             document.getElementById('section-' + id).classList.add('active-section');
+            
+            // עדכון הניווט הפעיל
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+            document.getElementById('nav-' + id).classList.add('active');
+            
             window.scrollTo(0, 0);
         }
 
@@ -314,16 +295,20 @@
             document.documentElement.style.setProperty('--header-color', val);
         }
 
+        // פונקציה לעדכון מיידי של פריסת ההדפסה מבלי לייצר מחדש
+        function updatePrintLayout() {
+            const val = document.getElementById('cardsPerPage').value;
+            document.body.className = `print-${val}`;
+        }
+
         function generateAllCards() {
             const size = parseInt(document.getElementById('boardSize').value);
             const total = parseInt(document.getElementById('totalCards').value);
             const maxNum = parseInt(document.getElementById('maxNumberInput').value);
             const centerOpt = document.getElementById('centerOption').value;
             const isEmpty = document.getElementById('emptyCardsOption').value === 'yes';
-            const cardsPerPage = document.getElementById('cardsPerPage').value;
             
-            // עדכון מחלקת הדפסה
-            document.body.className = `print-${cardsPerPage}`;
+            updatePrintLayout();
 
             const container = document.getElementById('output-container');
             container.innerHTML = '';
@@ -347,15 +332,12 @@
                         let max = (c === size - 1) ? maxNum : (c + 1) * rangePerCol;
                         let pool = [];
                         for (let n = min; n <= max; n++) pool.push(n);
-                        
                         for (let j = 0; j < size; j++) {
                             const rIdx = Math.floor(Math.random() * pool.length);
                             colNums.push(pool.splice(rIdx, 1)[0]);
                         }
                         colNums.sort((a, b) => a - b);
-                    } else {
-                        colNums = new Array(size).fill("");
-                    }
+                    } else { colNums = new Array(size).fill(""); }
                     cardColumns.push(colNums);
                 }
 
@@ -365,7 +347,6 @@
                 tableHtml += `</tr></thead><tbody>`;
 
                 const centerIdx = Math.floor(size / 2);
-
                 for (let r = 0; r < size; r++) {
                     tableHtml += `<tr>`;
                     for (let c = 0; c < size; c++) {
