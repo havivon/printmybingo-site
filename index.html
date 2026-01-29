@@ -326,29 +326,36 @@
             </div>
             
             <div id="output-container" onmousedown="startDrag(event)" ontouchstart="startDrag(event)"></div>
+
+            <div id="content-adsense" class="no-print mt-12 space-y-8">
+                <div class="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                    <h2 class="text-2xl font-bold text-blue-800 mb-4" data-i18n="usesTitle">למה כדאי להשתמש בבינגו בפעילות הבאה שלכם?</h2>
+                    <div class="text-gray-600 text-sm md:text-base space-y-4 leading-relaxed" data-i18n="usesContent"></div>
+                </div>
+            </div>
         </div>
 
-        <div id="section-guide" class="page-section bg-white p-6 md:p-10 rounded-2xl shadow-lg max-w-4xl mx-auto">
+        <div id="section-guide" class="page-section bg-white p-6 md:p-10 rounded-2xl shadow-lg max-w-4xl mx-auto mt-10">
             <h2 class="text-3xl font-bold mb-6 text-blue-800" data-i18n="seoTitle">מדריך: איך ליצור ולהדפיס משחק בינגו בקלות?</h2>
             <div id="seo-content-area" class="text-gray-700 leading-relaxed space-y-4"></div>
         </div>
 
-        <div id="section-history" class="page-section bg-white p-6 md:p-10 rounded-2xl shadow-lg max-w-4xl mx-auto">
+        <div id="section-history" class="page-section bg-white p-6 md:p-10 rounded-2xl shadow-lg max-w-4xl mx-auto mt-10">
             <h2 class="text-3xl font-bold mb-6 text-blue-800" data-i18n="historyTitle">ההיסטוריה של הבינגו</h2>
             <div id="history-content-area" class="text-gray-700 leading-relaxed space-y-4"></div>
         </div>
 
-        <div id="section-about" class="page-section bg-white p-6 md:p-10 rounded-2xl shadow-lg max-w-4xl mx-auto">
+        <div id="section-about" class="page-section bg-white p-6 md:p-10 rounded-2xl shadow-lg max-w-4xl mx-auto mt-10">
             <h2 class="text-3xl font-bold mb-6 text-blue-800" data-i18n="aboutTitle">אודות</h2>
             <div id="about-content-area" class="text-gray-700 leading-loose space-y-6"></div>
         </div>
 
-        <div id="section-terms" class="page-section bg-white p-6 md:p-10 rounded-2xl shadow-lg max-w-4xl mx-auto">
+        <div id="section-terms" class="page-section bg-white p-6 md:p-10 rounded-2xl shadow-lg max-w-4xl mx-auto mt-10">
             <h2 class="text-3xl font-bold mb-6 text-blue-800" data-i18n="termsTitle">תנאי שימוש</h2>
             <div id="terms-content-area" class="text-gray-700 leading-loose space-y-6"></div>
         </div>
 
-        <div id="section-contact" class="page-section bg-white p-6 md:p-10 rounded-2xl shadow-lg text-center max-w-4xl mx-auto">
+        <div id="section-contact" class="page-section bg-white p-6 md:p-10 rounded-2xl shadow-lg text-center max-w-4xl mx-auto mt-10">
             <h2 class="text-3xl font-bold mb-6 text-blue-800" data-i18n="contactTitle">צור קשר</h2>
             <div id="contact-content-area" class="text-gray-700 space-y-4"></div>
         </div>
@@ -386,42 +393,37 @@
                 alignLeft: 'שמאל', alignRight: 'ימין',
                 chooseTheme: 'ערכות נושא מוכנות', themeBirthday: 'יום הולדת', themeSummer: 'קיץ', themeBaby: 'לידה', themeParty: 'מסיבה',
                 
-                // --- Expanded Content for Google AdSense ---
+                usesTitle: 'למה כדאי להשתמש בבינגו בפעילות הבאה שלכם?',
+                usesContent: `<p>בינגו הוא כלי חינוכי וחברתי רב-עוצמה. בין אם מדובר בשיעור בכיתה, אירוע חברה או מסיבת יום הולדת, המשחק מעודד ריכוז, זיהוי תבניות ואינטראקציה חברתית. האתר שלנו מאפשר לכם לייצר לוחות בינגו מותאמים אישית (Custom Bingo) בקלות ובמהירות, ללא צורך בהורדת תוכנה.</p>
+                    <div class="grid md:grid-cols-2 gap-6 mt-4">
+                        <div class="bg-blue-50 p-4 rounded-xl">
+                            <h3 class="font-bold text-blue-900 mb-2">🎓 בינגו למורים וגננות</h3>
+                            <p>השתמשו במצב "מילים" כדי לחזק אוצר מילים בשפה חדשה, ללמוד מושגים במדעים או לתרגל לוח הכפל במצב מספרים. לוחות הבינגו שלנו מיועדים להדפסה חסכונית וברורה.</p>
+                        </div>
+                        <div class="bg-orange-50 p-4 rounded-xl">
+                            <h3 class="font-bold text-orange-900 mb-2">🎉 בינגו לאירועים חברתיים</h3>
+                            <p>צרו משחק "בינגו אנושי" להכרות בערבי צוות, או בינגו תמונות למסיבות יום הולדת. האפשרות להוסיף לוגו ורקע מאפשרת לכם לשמור על מיתוג האירוע שלכם.</p>
+                        </div>
+                    </div>`,
+
                 seoTitle: 'מדריך: איך ליצור ולהדפיס משחק בינגו בקלות?',
-                seoContent: `
-                    <p>משחק הבינגו הוא אחד המשחקים הקלאסיים והאהובים ביותר בעולם, המתאים לכל גיל - מילדים בגן ועד למבוגרים באירועי חברה. הכלי החינמי שלנו, PrintMyBingo, פותח במטרה לאפשר לכם ליצור כרטיסיות משחק מעוצבות ומותאמות אישית תוך שניות, ללא צורך בידע טכני או בהורדת תוכנה.</p>
-                    <h3 class="font-bold text-lg mt-4 text-gray-800">בינגו מילים או מספרים?</h3>
-                    <p>האתר שלנו מציע שני מצבי משחק עיקריים:</p>
-                    <ul class="list-disc list-inside space-y-1 mb-4">
-                        <li><strong>בינגו מספרים קלאסי:</strong> מתאים לתרגול מתמטיקה, הכרת מספרים או משחק מזל מסורתי.</li>
-                        <li><strong>בינגו מילים (חדש!):</strong> הכלי המושלם למורים! הזינו רשימת מילים (כגון שמות תלמידים, מילים באנגלית, מושגים היסטוריים או חגי ישראל) והמערכת תיצור לוחות ייחודיים לכל תלמיד.</li>
-                    </ul>
-                    <h3 class="font-bold text-lg mt-4 text-gray-800">שלבים ליצירת המשחק:</h3>
-                    <ul class="list-disc list-inside space-y-1">
-                        <li>בחרו את סוג המשחק (מספרים או מילים).</li>
-                        <li>בחרו את גודל הלוח הרצוי (לדוגמה 5x5).</li>
-                        <li>הגדירו את כמות הכרטיסים שתרצו להפיק.</li>
-                        <li>הוסיפו כותרת מותאמת אישית, לוגו או תמונת רקע כדי למתג את המשחק.</li>
-                        <li>לחצו על "צור כרטיסי בינגו" והדפיסו ישירות מהאתר.</li>
-                    </ul>
-                    <p class="mt-4"><strong>טיפ למורים:</strong> השתמשו בבינגו ככלי לחזרה לפני מבחן. הקריאו את ההגדרה, והתלמידים צריכים לסמן את המושג המתאים בלוח.</p>`,
+                seoContent: `<p>משחק הבינגו הוא אחד המשחקים הקלאסיים והאהובים ביותר בעולם, המתאים לכל גיל - מילדים בגן ועד למבוגרים באירועי חברה. הכלי החינמי שלנו, PrintMyBingo, פותח במטרה לאפשר לכם ליצור כרטיסיות משחק מעוצבות ומותאמות אישית תוך שניות, ללא צורך בידע טכני או בהורדת תוכנה.</p>
+                             <h3 class="font-bold text-lg mt-4 text-gray-800">למה להשתמש במחולל הבינגו שלנו?</h3>
+                             <p>בעוד שניתן לקנות משחקי בינגו מוכנים בחנויות, יצירת משחק מותאם אישית משדרגת את החוויה. המערכת שלנו מאפשרת שליטה מלאה על מאפייני המשחק: בחירת גודל הלוח (3x3 לקטנטנים, 4x4 לבינוניים ו-5x5 למשחק המקצועי), הגדרת טווח המספרים בהתאם לרמת הקושי, ואפילו שינוי הכותרות בראש הטבלה לשמות הילדים, נושאי השיעור או כל מילה אחרת.</p>
+                             <h3 class="font-bold text-lg mt-4 text-gray-800">שלבים ליצירת המשחק:</h3>
+                             <ul class="list-disc list-inside space-y-1">
+                                <li>בחרו את גודל הלוח הרצוי (לדוגמה 5x5).</li>
+                                <li>הגדירו את כמות הכרטיסים שתרצו להפיק (המערכת דואגת שכל כרטיס יהיה ייחודי).</li>
+                                <li>לחצו על "צור כרטיסי בינגו" וצפו בתוצאה המיידית.</li>
+                                <li>הדפיסו את הלוחות ישירות מהדפדפן או שמרו כקובץ PDF לשליחה.</li>
+                             </ul>
+                             <p class="mt-4">האתר שלנו מותאם במיוחד למורים, גננות, הורים ומפיקי אירועים המחפשים פתרון מהיר, אסתטי וחינמי לפעילות חברתית מגבשת. אנחנו דואגים שהעיצוב יהיה נקי ונוח להדפסה ביתית חסכונית בדיו.</p>`,
                 
-                historyTitle: 'תולדות הבינגו: מסע היסטורי מרתק',
-                historyContent: `
-                    <p>רבים חושבים שהבינגו הוא משחק מודרני, אך שורשיו מגיעים הרחק אל איטליה של המאה ה-16. המשחק החל בשנת 1530 כהגרלה לאומית בשם "Lo Giuoco del Lotto d'Italia", שמתקיימת באיטליה עד היום בכל יום שבת.</p>
-                    
-                    <h3 class="font-bold text-lg mt-4 text-gray-800">המעבר לצרפת וגרמניה</h3>
-                    <p>במאה ה-18 המשחק הגיע לצרפת ("Le Lotto"), שם הוא אומץ בעיקר על ידי האליטה החברתית. הגרסה הצרפתית קבעה את המבנה המוכר לנו כיום: כרטיס עם שלוש שורות ותשע עמודות. בגרמניה של המאה ה-19, המשחק שימש ככלי חינוכי ללימוד ילדים לוח הכפל, איות והיסטוריה - בדומה לשימוש שאנו עושים באתר זה כיום.</p>
-                    
-                    <h3 class="font-bold text-lg mt-4 text-gray-800">משעועית ועד בינגו</h3>
-                    <p>בשנות ה-20 של המאה הקודמת, המשחק הגיע לארצות הברית תחת השם "Beano", מכיוון שהשחקנים השתמשו בשעועית (Beans) מיובשת כדי לסמן את המספרים. את המשחק ניהלו בירידים כפריים.</p>
-                    <p>האגדה מספרת שאיש העסקים הניו-יורקי אדווין לאו (Edwin Lowe) נכח ביריד כזה בג'ורג'יה. הוא הבחין בשחקן נרגש שזכה וצעק בטעות "בינגו!" במקום "בינו!". לאו זיהה את הפוטנציאל השיווקי של השם הקליט.</p>
-                    
-                    <h3 class="font-bold text-lg mt-4 text-gray-800">המתמטיקה שמאחורי המשחק</h3>
-                    <p>לאו שכר את שירותיו של פרופסור למתמטיקה מאוניברסיטת קולומביה, קרל לפלר, כדי ליצור אלפי שילובים שונים של כרטיסים עם מספרים אקראיים, כדי להפחית את הסיכוי לזכיות כפולות באותו משחק. העבודה הייתה כה אינטנסיבית שלפי השמועות הפרופסור יצא מדעתו לאחר השלמת 6,000 הכרטיסים הראשונים.</p>
-                    
-                    <h3 class="font-bold text-lg mt-4 text-gray-800">יתרונות קוגניטיביים</h3>
-                    <p>מחקרים מודרניים מראים שבינגו אינו רק משחק מזל. עבור קשישים ומבוגרים, המשחק משפר את הזיכרון לטווח קצר, את מהירות העיבוד ואת הקואורדינציה בין העין ליד. עבור ילדים, הוא משפר מיומנויות זיהוי מספרים ואותיות, ומלמד סבלנות ודחיית סיפוקים.</p>`,
+                historyTitle: 'תולדות הבינגו: מאיטליה ועד העולם',
+                historyContent: `<p>רבים חושבים שהבינגו הוא משחק מודרני, אך שורשיו מגיעים הרחק אל איטליה של המאה ה-16. המשחק החל בשנת 1530 כהגרלה לאומית בשם "Lo Giuoco del Lotto d'Italia", שמתקיימת באיטליה עד היום בכל יום שבת.</p>
+                                 <p>במאה ה-18 המשחק הגיע לצרפת ("Le Lotto"), שם הוא אומץ בעיקר על ידי האליטה החברתית. הגרסה הצרפתית קבעה את המבנה המוכר לנו כיום: כרטיס עם שלוש שורות ותשע עמודות.</p>
+                                 <h3 class="font-bold text-lg mt-4 text-gray-800">איך קיבל הבינגו את שמו?</h3>
+                                 <p>בשנות ה-20 של המאה הקודמת, המשחק הגיע לארצות הברית תחת השם "Beano", מכיוון שהשחקנים השתמשו בשעועית (Beans) כדי לסמן את המספרים. האגדה מספרת שאיש העסקים אדווין לאו (Edwin Lowe) שמע בטעות שחקן נרגש צועק "בינגו!" במקום "בינו!" לאחר שזכה. לאו זיהה את הפוטנציאל, שכר פרופסור למתמטיקה כדי ליצור אלפי שילובים שונים של כרטיסים, והפך את הבינגו ללהיט עולמי שמשוחק עד היום בכנסיות, בתי ספר ומרכזים קהילתיים.</p>`,
 
                 aboutTitle: 'אודות PrintMyBingo',
                 aboutContent: `<p>ברוכים הבאים ל-PrintMyBingo, הפלטפורמה המובילה והמתקדמת בישראל ליצירת משחקי חברה וכרטיסיות בינגו להדפסה. המשימה שלנו היא לפשט את תהליך הכנת הפעילויות החברתיות ולהפוך אותו לנגיש, מהיר ומהנה עבור כולם.</p>
@@ -454,7 +456,7 @@
                 resetButton: 'Full Reset', printButton: 'Print / Save as PDF',
                 addBgImageBtn: 'Add Background / Logo',
                 uploadLabel: 'Or Upload Image',
-                removeBgImageBtn: 'Remove BG 🗑️',
+                removeBgImageBtn: 'Remove Background 🗑️',
                 zoomLabel: 'Zoom',
                 opacityLabel: 'Image Opacity',
                 dragTip: '💡 Tip: You can move and center the image by dragging it directly on the generated bingo cards below.',
@@ -463,6 +465,19 @@
                 addLogoLabel: 'Add Logo', chooseLogo: 'Select Logo...',
                 alignLeft: 'Left', alignRight: 'Right',
                 chooseTheme: 'Theme Presets', themeBirthday: 'Birthday', themeSummer: 'Summer', themeBaby: 'Baby/Birth', themeParty: 'Party',
+
+                usesTitle: 'Why use Bingo for your next activity?',
+                usesContent: `<p>Bingo is a powerful social and educational tool. Whether in the classroom, a corporate event, or a birthday party, the game encourages focus, pattern recognition, and social interaction. Our site allows you to create custom bingo cards easily and quickly.</p>
+                    <div class="grid md:grid-cols-2 gap-6 mt-4">
+                        <div class="bg-blue-50 p-4 rounded-xl">
+                            <h3 class="font-bold text-blue-900 mb-2">🎓 Bingo for Teachers</h3>
+                            <p>Use "Word Mode" to reinforce vocabulary in a new language, learn science concepts, or practice multiplication tables in number mode.</p>
+                        </div>
+                        <div class="bg-orange-50 p-4 rounded-xl">
+                            <h3 class="font-bold text-orange-900 mb-2">🎉 Bingo for Events</h3>
+                            <p>Create "Human Bingo" for team icebreakers or picture bingo for birthday parties. Add a logo and background to brand your event.</p>
+                        </div>
+                    </div>`,
 
                 seoTitle: 'Guide: How to Create and Print a Bingo Game Easily?',
                 seoContent: `
@@ -483,18 +498,32 @@
                 
                 historyTitle: 'The History of Bingo',
                 historyContent: `
-                    <p>Bingo's origins date back to Italy in 1530 with a lottery called "Lo Giuoco del Lotto d'Italia", which is still played every Saturday. From Italy, the game moved to France in the late 1770s, where it was called "Le Lotto".</p>
+                    <p>Many believe Bingo is a modern game, but its roots trace back to Italy in the 16th century. The game began in 1530 as a national lottery called "Lo Giuoco del Lotto d'Italia", which is still played in Italy every Saturday.</p>
+                    <h3 class="font-bold text-lg mt-4 text-gray-800">Migration to France and Germany</h3>
+                    <p>In the 18th century, the game reached France ("Le Lotto"), where it was adopted mainly by the social elite. The French version established the structure we recognize today: a card with three rows and nine columns. In 19th-century Germany, the game was used as an educational tool to teach children multiplication tables, spelling, and history.</p>
                     <h3 class="font-bold text-lg mt-4 text-gray-800">From Beano to Bingo</h3>
-                    <p>In the 1920s, the game reached North America as "Beano". It was played at country fairs where a dealer would select numbered discs from a cigar box and players would mark their cards with beans. They yelled "Beano" if they won. Edwin Lowe, a toy salesman from New York, renamed the game "Bingo" after he overheard someone accidentally yell "Bingo" instead of "Beano".</p>
-                    <h3 class="font-bold text-lg mt-4 text-gray-800">Educational Benefits</h3>
-                    <p>Research shows Bingo improves listening skills, short-term memory, and cognitive speed in both children and seniors.</p>`,
+                    <p>In the 1920s, the game reached North America under the name "Beano", because players used dried beans to mark the numbers. The legend says that businessman Edwin Lowe heard an excited player yell "Bingo!" instead of "Beano!" by mistake after winning. Lowe recognized the marketing potential and turned it into the hit game we know today.</p>
+                    <h3 class="font-bold text-lg mt-4 text-gray-800">The Mathematics Behind the Game</h3>
+                    <p>Lowe hired a mathematics professor from Columbia University, Carl Leffler, to create thousands of different card combinations to reduce the chance of duplicate wins. The work was so intense that rumor has it the professor lost his mind after completing the first 6,000 cards.</p>
+                    <h3 class="font-bold text-lg mt-4 text-gray-800">Cognitive Benefits</h3>
+                    <p>Modern studies show that Bingo is not just a game of luck. For seniors, the game improves short-term memory and processing speed. For children, it enhances number and letter recognition skills, and teaches patience.</p>`,
 
                 aboutTitle: 'About PrintMyBingo',
-                aboutContent: `<p>Welcome to PrintMyBingo...</p>`,
+                aboutContent: `<p>Welcome to PrintMyBingo, the leading platform for creating printable bingo cards. Our mission is to make social and educational activities accessible, fast, and fun for everyone.</p><p>This tool was created to help teachers and parents produce professional-looking cards without registration or payment. We use a smart algorithm to ensure true randomness and a fair game for all participants.</p>`,
+                
                 termsTitle: 'Terms of Use',
-                termsContent: `<p>Welcome to PrintMyBingo...</p>`,
-                contactTitle: 'We\'d Love to Hear From You',
-                contactContent: `<p>We are here for you!</p>`
+                termsContent: `<p>Welcome to PrintMyBingo. By using this site, you agree to the following terms:</p>
+                               <ul class="list-disc list-inside space-y-2">
+                                 <li><strong>Nature of Site:</strong> This is a free service provided by a private individual.</li>
+                                 <li><strong>Usage:</strong> The cards generated are for personal, educational, or social use. You may print and distribute them freely. However, selling the generated files or the automated service itself is prohibited.</li>
+                                 <li><strong>Disclaimer:</strong> The service is provided "As Is". We are not responsible for any technical issues or damages resulting from use.</li>
+                                 <li><strong>Ads:</strong> We display ads (e.g., Google AdSense) to cover maintenance costs.</li>
+                               </ul>`,
+                
+                contactTitle: 'Contact Us',
+                contactContent: `<p>We are here for you! Do you have an idea for improvement? Found a bug? Or just want to say thanks?</p>
+                                 <p>We value your feedback.</p>
+                                 <p class="font-bold text-blue-600 mt-4">You can contact us via email at: havivontm@gmail.com</p>`
             }
         };
 
@@ -508,6 +537,7 @@
             const browserLang = navigator.language || navigator.userLanguage;
             currentLang = browserLang.startsWith('he') ? 'he' : 'en';
             applyLanguage();
+            // Default position based on language if not set
             const posSelect = document.getElementById('logoPosition');
             if(posSelect) posSelect.value = currentLang === 'he' ? 'left' : 'right';
         }
@@ -573,7 +603,7 @@
             const presets = {
                 'birthday': 'https://images.unsplash.com/photo-1558636508-e0db3814bd1d?auto=format&fit=crop&w=800&q=80',
                 'summer': 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
-                'baby': 'https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=800&q=80',
+                'baby': 'https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=800&q=80', // Baby Theme
                 'party': 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=800&q=80'
             };
             
