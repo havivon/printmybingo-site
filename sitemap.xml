@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url><loc>https://printmybingo.com/</loc></url>
-<url><loc>https://printmybingo.com/privacy.html</loc></url>
-<url><loc>https://printmybingo.com/blog.html</loc></url>
+  <url><loc>https://printmybingo.com/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://printmybingo.com/blog.html</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://printmybingo.com/privacy.html</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://printmybingo.com/terms.html</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://printmybingo.com/about.html</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://printmybingo.com/blog/classroom-bingo.html</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://printmybingo.com/blog/fundraising-bingo-night.html</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://printmybingo.com/blog/birthday-party-bingo.html</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://printmybingo.com/blog/human-bingo-icebreaker.html</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://printmybingo.com/blog/print-bingo-cards-pdf.html</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://printmybingo.com/blog/bingo-rules-variations.html</loc><changefreq>weekly</changefreq></url>
 </urlset>
-
