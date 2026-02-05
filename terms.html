@@ -3,60 +3,101 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="canonical" href="https://printmybingo.com/terms.html">
-<meta name="robots" content="index,follow">
-<title>Terms of Use</title>
+<title>Terms of Use | Print My Bingo</title>
 <meta name="description" content="Terms of Use for Print My Bingo.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://printmybingo.com/terms.html">
+<script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-50 text-gray-800">
 <header class="bg-white border-b">
   <div class="max-w-6xl mx-auto p-4 flex items-center justify-between">
-    <a href="/" class="font-bold text-blue-700">← Print My Bingo</a>
-    <nav class="text-sm flex gap-4">
-      <a class="underline" href="/blog.html">Blog</a>
-      <a class="underline" href="/privacy.html">Privacy</a>
-      <a class="underline" href="/terms.html">Terms</a>
-      <a class="underline" href="/about.html">About</a>
-    </nav>
+    <a href="/" class="font-bold text-blue-700" id="backLink">← Print My Bingo</a>
+    <div class="flex items-center gap-4 text-sm">
+      <nav class="hidden sm:flex gap-4">
+        <a class="underline" href="/blog.html" data-i18n="navBlog">Blog</a>
+        <a class="underline" href="/privacy.html" data-i18n="navPrivacy">Privacy</a>
+        <a class="underline" href="/terms.html" data-i18n="navTerms">Terms</a>
+        <a class="underline" href="/about.html" data-i18n="navAbout">About</a>
+      </nav>
+      <button id="langBtn" class="px-3 py-1 border rounded-lg bg-white">עברית</button>
+    </div>
   </div>
 </header>
+
 <main class="max-w-6xl mx-auto p-4">
   <article class="bg-white border rounded-2xl p-6 md:p-10 shadow-sm">
-<h1 class="text-3xl md:text-4xl font-extrabold text-blue-800 mb-4">Terms of Use</h1>
-
-<p class="leading-relaxed">These Terms of Use govern your use of <strong>Print My Bingo</strong>. By using the website, you agree to these terms.</p>
-
-<h2 class="text-xl font-bold mt-8 mb-2">1) Service</h2>
-<p class="leading-relaxed">Print My Bingo provides a free, browser-based bingo card generator that can export printable boards (including PDF printing via your browser).</p>
-
-<h2 class="text-xl font-bold mt-8 mb-2">2) Acceptable use</h2>
-<ul class="list-disc list-inside space-y-2 leading-relaxed">
-  <li>Do not use the site for unlawful purposes.</li>
-  <li>Do not attempt to disrupt, overload, or reverse engineer the service.</li>
-  <li>You are responsible for the content you enter (e.g., word lists) and how you use generated cards.</li>
-</ul>
-
-<h2 class="text-xl font-bold mt-8 mb-2">3) Intellectual property</h2>
-<p class="leading-relaxed">The website design and code are owned by Print My Bingo. Generated bingo cards are produced from user inputs; you may print them for personal, educational, or event use.</p>
-
-<h2 class="text-xl font-bold mt-8 mb-2">4) Disclaimer</h2>
-<p class="leading-relaxed">The service is provided “as is” without warranties. We are not liable for damages arising from use of the site.</p>
-
-<h2 class="text-xl font-bold mt-8 mb-2">5) Changes</h2>
-<p class="leading-relaxed">We may update these terms to reflect improvements or legal requirements.</p>
-
-<p class="text-sm text-gray-500 mt-8">Last updated: 2026-02-04</p>
-
+    <h1 class="text-3xl md:text-4xl font-extrabold text-blue-800 mb-4" data-i18n="h1">Terms of Use | Print My Bingo</h1>
+    <div id="content" class="prose max-w-none prose-p:leading-relaxed prose-li:leading-relaxed prose-headings:text-gray-900"></div>
     <div class="mt-10 p-5 bg-blue-50 rounded-2xl">
-      <p class="font-semibold text-blue-900 mb-2">Generate cards now</p>
-      <p class="text-blue-900/90">Open the generator, choose Numbers or Words, and print or save as PDF.</p>
-      <a class="inline-block mt-4 bg-blue-600 text-white px-5 py-3 rounded-xl font-bold" href="/">Open Generator</a>
+      <p class="font-semibold text-blue-900 mb-2" data-i18n="ctaT">Generate cards now</p>
+      <p class="text-blue-900/90" data-i18n="ctaB">Open the generator, choose Numbers or Words, and print or save as PDF.</p>
+      <a class="inline-block mt-4 bg-blue-600 text-white px-5 py-3 rounded-xl font-bold" href="/" data-i18n="ctaBtn">Open Generator</a>
     </div>
   </article>
 </main>
+
 <footer class="text-center text-sm text-gray-500 py-10">
   © 2026 Print My Bingo • <a class="underline" href="/sitemap.xml">Sitemap</a>
 </footer>
+
+<script>
+const T = {
+  en: {
+    navBlog: "Blog", navPrivacy: "Privacy", navTerms: "Terms", navAbout: "About",
+    h1: "Terms of Use | Print My Bingo",
+    ctaT: "Generate cards now",
+    ctaB: "Open the generator, choose Numbers or Words, and print or save as PDF.",
+    ctaBtn: "Open Generator",
+    back: "← Print My Bingo",
+    body: `<p>These Terms of Use govern your use of <strong>Print My Bingo</strong>. By using the website, you agree to these terms.</p>
+<h2>1) The service</h2><p>Print My Bingo provides a free, browser-based bingo card generator that supports numbers and words and can be printed or saved as PDF using your browser.</p>
+<h2>2) Acceptable use</h2><ul><li>Do not use the site for unlawful purposes.</li><li>Do not attempt to disrupt or overload the service.</li><li>You are responsible for the content you enter (e.g., word lists) and how you use generated cards.</li></ul>
+<h2>3) Disclaimer</h2><p>The service is provided “as is” without warranties. We are not liable for damages arising from your use of the site.</p>
+<h2>4) Changes</h2><p>We may update these terms to reflect improvements or legal requirements.</p>
+<p class="text-sm text-gray-500">Last updated: 2026-02-04</p>`
+  },
+  he: {
+    navBlog: "בלוג", navPrivacy: "פרטיות", navTerms: "תנאי שימוש", navAbout: "אודות",
+    h1: "תנאי שימוש | Print My Bingo",
+    ctaT: "צור/י כרטיסים עכשיו",
+    ctaB: "חזור/י למחולל, בחר/י מספרים או מילים, והדפס/י או שמור/י ל‑PDF.",
+    ctaBtn: "פתח את המחולל",
+    back: "← Print My Bingo",
+    body: `<p>תנאי שימוש אלו מסדירים את השימוש שלך ב־<strong>Print My Bingo</strong>. שימוש באתר מהווה הסכמה לתנאים.</p>
+<h2>1) השירות</h2><p>Print My Bingo הוא מחולל בינגו חינמי בדפדפן, תומך במספרים ובמילים, ומאפשר הדפסה או שמירה כ־PDF דרך חלון ההדפסה של הדפדפן.</p>
+<h2>2) שימוש מותר</h2><ul><li>אין להשתמש באתר למטרות בלתי חוקיות.</li><li>אין לנסות לשבש, להעמיס או לפגוע בשירות.</li><li>את/ה אחראי/ת לתוכן שמוזן (למשל רשימות מילים) ולאופן השימוש בכרטיסים שנוצרו.</li></ul>
+<h2>3) כתב ויתור</h2><p>השירות ניתן “כפי שהוא” ללא אחריות. איננו אחראים לנזקים שייגרמו כתוצאה מהשימוש באתר.</p>
+<h2>4) שינויים</h2><p>ייתכן שנעדכן את התנאים מעת לעת בהתאם לשיפורים או דרישות חוק.</p>
+<p class="text-sm text-gray-500">עודכן לאחרונה: 2026-02-04</p>`
+  }
+};
+
+let lang = (navigator.language || "").toLowerCase().startsWith("he") ? "he" : "en";
+
+function apply() {
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === "he" ? "rtl" : "ltr";
+  document.getElementById("langBtn").textContent = lang === "he" ? "English" : "עברית";
+  document.getElementById("backLink").textContent = T[lang].back;
+  document.getElementById("content").innerHTML = T[lang].body;
+
+  for (const el of document.querySelectorAll("[data-i18n]")) {
+    const k = el.getAttribute("data-i18n");
+    if (T[lang][k]) el.textContent = T[lang][k];
+  }
+
+  document.title = (lang === "he") ? "תנאי שימוש | Print My Bingo" : "Terms of Use | Print My Bingo";
+  const metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc) metaDesc.setAttribute("content", (lang === "he") ? "תנאי שימוש של Print My Bingo." : "Terms of Use for Print My Bingo.");
+}
+
+document.getElementById("langBtn").addEventListener("click", () => {
+  lang = (lang === "he") ? "en" : "he";
+  apply();
+});
+
+apply();
+</script>
 </body>
 </html>
