@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="canonical" href="https://printmybingo.com/blog/birthday-party-bingo.html">
+<title>Birthday Party Bingo | Print My Bingo</title>
+<meta name="description" content="Birthday bingo themes and word lists.">
 <meta name="robots" content="index,follow">
-<title>Birthday Party Bingo (Kids): Themes, Word Lists & Tips</title>
-<meta name="description" content="Printable birthday party bingo ideas for kids: themes, word lists, and quick rules.">
+<link rel="canonical" href="https://printmybingo.com/blog/birthday-party-bingo.html">
+<script src="https://cdn.tailwindcss.com"></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "Birthday Party Bingo (Kids): Themes, Word Lists & Tips",
+  "headline": "Birthday Party Bingo",
   "datePublished": "2026-02-04",
   "dateModified": "2026-02-04",
   "author": {
@@ -29,44 +29,82 @@
 <body class="bg-gray-50 text-gray-800">
 <header class="bg-white border-b">
   <div class="max-w-6xl mx-auto p-4 flex items-center justify-between">
-    <a href="/" class="font-bold text-blue-700">← Print My Bingo</a>
-    <nav class="text-sm flex gap-4">
-      <a class="underline" href="/blog.html">Blog</a>
-      <a class="underline" href="/privacy.html">Privacy</a>
-      <a class="underline" href="/terms.html">Terms</a>
-      <a class="underline" href="/about.html">About</a>
-    </nav>
+    <a href="/" class="font-bold text-blue-700" id="backLink">← Print My Bingo</a>
+    <div class="flex items-center gap-4 text-sm">
+      <nav class="hidden sm:flex gap-4">
+        <a class="underline" href="/blog.html" data-i18n="navBlog">Blog</a>
+        <a class="underline" href="/privacy.html" data-i18n="navPrivacy">Privacy</a>
+        <a class="underline" href="/terms.html" data-i18n="navTerms">Terms</a>
+        <a class="underline" href="/about.html" data-i18n="navAbout">About</a>
+      </nav>
+      <button id="langBtn" class="px-3 py-1 border rounded-lg bg-white">עברית</button>
+    </div>
   </div>
 </header>
+
 <main class="max-w-6xl mx-auto p-4">
   <article class="bg-white border rounded-2xl p-6 md:p-10 shadow-sm">
-<h1 class="text-3xl md:text-4xl font-extrabold text-blue-800 mb-4">Birthday Party Bingo (Kids): Themes, Word Lists & Tips</h1>
-<p class='leading-relaxed'>Birthday bingo is a perfect 10–15 minute activity that keeps a group entertained while you set up food, gifts, or the next game. Use Word mode to build themed boards and keep printing simple.</p>
-<h2 class='text-xl font-bold mt-8 mb-2'>Pick a board size by age</h2>
-<div class='leading-relaxed space-y-3'><p>For ages 4–6: 3×3 or 4×4. For ages 7+: 4×4 or 5×5. Add a FREE center for younger kids to increase wins and smiles.</p></div>
-<h2 class='text-xl font-bold mt-8 mb-2'>Easy party themes (copy-paste)</h2>
-<div class='leading-relaxed space-y-3'><p><strong>Animals:</strong> dog, cat, lion, elephant, giraffe, monkey, zebra, tiger, bear, dolphin.</p><p><strong>Superhero:</strong> cape, mask, hero, shield, power, mission, team, villain, lightning, gadget.</p><p><strong>Sports:</strong> ball, goal, team, coach, win, score, practice, stadium, jersey, whistle.</p></div>
-<h2 class='text-xl font-bold mt-8 mb-2'>Make it fast and fair</h2>
-<div class='leading-relaxed space-y-3'><ul class='list-disc list-inside space-y-2'><li>Use line wins only (row/column/diagonal) for quick rounds.</li><li>Plan 2–3 rounds instead of one long game.</li><li>Have small prizes ready (stickers, candy, mini toys).</li></ul></div>
-<h2 class='text-xl font-bold mt-8 mb-2'>Add your party branding</h2>
-<div class='leading-relaxed space-y-3'><p>A small logo or light background can make printouts feel custom. Keep contrast high so words remain readable.</p></div>
-<h2 class='text-xl font-bold mt-8 mb-2'>FAQ</h2>
-
-<div class="leading-relaxed space-y-3">
-  <p><strong>Do I need an account?</strong> No—Print My Bingo works without signup.</p>
-  <p><strong>Can I use words instead of numbers?</strong> Yes—use Word mode and paste a list of terms.</p>
-  <p><strong>How do I export?</strong> Use your browser’s Print dialog to save as PDF or print directly.</p>
-</div>
-
+    <h1 class="text-3xl md:text-4xl font-extrabold text-blue-800 mb-4" data-i18n="h1">Birthday Party Bingo | Print My Bingo</h1>
+    <div id="content" class="prose max-w-none prose-p:leading-relaxed prose-li:leading-relaxed prose-headings:text-gray-900"></div>
     <div class="mt-10 p-5 bg-blue-50 rounded-2xl">
-      <p class="font-semibold text-blue-900 mb-2">Generate cards now</p>
-      <p class="text-blue-900/90">Open the generator, choose Numbers or Words, and print or save as PDF.</p>
-      <a class="inline-block mt-4 bg-blue-600 text-white px-5 py-3 rounded-xl font-bold" href="/">Open Generator</a>
+      <p class="font-semibold text-blue-900 mb-2" data-i18n="ctaT">Generate cards now</p>
+      <p class="text-blue-900/90" data-i18n="ctaB">Open the generator, choose Numbers or Words, and print or save as PDF.</p>
+      <a class="inline-block mt-4 bg-blue-600 text-white px-5 py-3 rounded-xl font-bold" href="/" data-i18n="ctaBtn">Open Generator</a>
     </div>
   </article>
 </main>
+
 <footer class="text-center text-sm text-gray-500 py-10">
   © 2026 Print My Bingo • <a class="underline" href="/sitemap.xml">Sitemap</a>
 </footer>
+
+<script>
+const T = {
+  en: {
+    navBlog: "Blog", navPrivacy: "Privacy", navTerms: "Terms", navAbout: "About",
+    h1: "Birthday Party Bingo | Print My Bingo",
+    ctaT: "Generate cards now",
+    ctaB: "Open the generator, choose Numbers or Words, and print or save as PDF.",
+    ctaBtn: "Open Generator",
+    back: "← Print My Bingo",
+    body: `<p>Perfect 10–15 minute party activity.</p><h2>Themes</h2><p>Animals, superheroes, sports—paste lists in Word mode.</p>`
+  },
+  he: {
+    navBlog: "בלוג", navPrivacy: "פרטיות", navTerms: "תנאי שימוש", navAbout: "אודות",
+    h1: "בינגו ליום הולדת | Print My Bingo",
+    ctaT: "צור/י כרטיסים עכשיו",
+    ctaB: "חזור/י למחולל, בחר/י מספרים או מילים, והדפס/י או שמור/י ל‑PDF.",
+    ctaBtn: "פתח את המחולל",
+    back: "← Print My Bingo",
+    body: `<p>פעילות מושלמת של 10–15 דקות.</p><h2>ערכות נושא</h2><p>חיות, גיבורים, ספורט—מדביקים רשימות במצב מילים.</p>`
+  }
+};
+
+let lang = (navigator.language || "").toLowerCase().startsWith("he") ? "he" : "en";
+
+function apply() {
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === "he" ? "rtl" : "ltr";
+  document.getElementById("langBtn").textContent = lang === "he" ? "English" : "עברית";
+  document.getElementById("backLink").textContent = T[lang].back;
+  document.getElementById("content").innerHTML = T[lang].body;
+
+  for (const el of document.querySelectorAll("[data-i18n]")) {
+    const k = el.getAttribute("data-i18n");
+    if (T[lang][k]) el.textContent = T[lang][k];
+  }
+
+  document.title = (lang === "he") ? "בינגו ליום הולדת | Print My Bingo" : "Birthday Party Bingo | Print My Bingo";
+  const metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc) metaDesc.setAttribute("content", (lang === "he") ? "ערכות נושא ורשימות לבינגו יום הולדת." : "Birthday bingo themes and word lists.");
+}
+
+document.getElementById("langBtn").addEventListener("click", () => {
+  lang = (lang === "he") ? "en" : "he";
+  apply();
+});
+
+apply();
+</script>
 </body>
 </html>

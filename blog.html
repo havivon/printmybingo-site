@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="canonical" href="https://printmybingo.com/blog.html">
-<meta name="robots" content="index,follow">
-<title>Bingo Blog & Guides</title>
+<title>Bingo Blog & Guides | Print My Bingo</title>
 <meta name="description" content="Bingo guides, classroom activities, party themes, and printing tips.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://printmybingo.com/blog.html">
+<script src="https://cdn.tailwindcss.com"></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -20,57 +20,98 @@
 <body class="bg-gray-50 text-gray-800">
 <header class="bg-white border-b">
   <div class="max-w-6xl mx-auto p-4 flex items-center justify-between">
-    <a href="/" class="font-bold text-blue-700">← Print My Bingo</a>
-    <nav class="text-sm flex gap-4">
-      <a class="underline" href="/blog.html">Blog</a>
-      <a class="underline" href="/privacy.html">Privacy</a>
-      <a class="underline" href="/terms.html">Terms</a>
-      <a class="underline" href="/about.html">About</a>
-    </nav>
+    <a href="/" class="font-bold text-blue-700" id="backLink">← Print My Bingo</a>
+    <div class="flex items-center gap-4 text-sm">
+      <nav class="hidden sm:flex gap-4">
+        <a class="underline" href="/blog.html" data-i18n="navBlog">Blog</a>
+        <a class="underline" href="/privacy.html" data-i18n="navPrivacy">Privacy</a>
+        <a class="underline" href="/terms.html" data-i18n="navTerms">Terms</a>
+        <a class="underline" href="/about.html" data-i18n="navAbout">About</a>
+      </nav>
+      <button id="langBtn" class="px-3 py-1 border rounded-lg bg-white">עברית</button>
+    </div>
   </div>
 </header>
+
 <main class="max-w-6xl mx-auto p-4">
   <article class="bg-white border rounded-2xl p-6 md:p-10 shadow-sm">
-<h1 class="text-3xl md:text-4xl font-extrabold text-blue-800 mb-4">Bingo Blog & Guides</h1>
-
-<p class="leading-relaxed mb-6">Practical guides and ready-to-use ideas to help you run better bingo activities. These pages are designed to be SEO-friendly and useful for real visitors (teachers, parents, event organizers).</p>
-
-<div class="grid md:grid-cols-2 gap-6">
-  <a class="block border rounded-2xl p-5 hover:shadow-sm bg-gray-50" href="/blog/classroom-bingo.html">
-    <h2 class="text-xl font-bold mb-2">Classroom Bingo: activities for teachers</h2>
-    <p class="text-gray-700">Vocabulary, math, science, reading—plus ready-to-copy word lists and lesson tips.</p>
-  </a>
-  <a class="block border rounded-2xl p-5 hover:shadow-sm bg-gray-50" href="/blog/fundraising-bingo-night.html">
-    <h2 class="text-xl font-bold mb-2">Fundraising Bingo Night: step-by-step plan</h2>
-    <p class="text-gray-700">How to run a smooth event, print unique cards, set rules, and pick prizes.</p>
-  </a>
-  <a class="block border rounded-2xl p-5 hover:shadow-sm bg-gray-50" href="/blog/birthday-party-bingo.html">
-    <h2 class="text-xl font-bold mb-2">Birthday Party Bingo: themed ideas for kids</h2>
-    <p class="text-gray-700">Themes, word lists, and formatting tips for a fast and fun party game.</p>
-  </a>
-  <a class="block border rounded-2xl p-5 hover:shadow-sm bg-gray-50" href="/blog/human-bingo-icebreaker.html">
-    <h2 class="text-xl font-bold mb-2">Human Bingo: the best icebreaker</h2>
-    <p class="text-gray-700">Team-building prompts, inclusivity tips, and printable layouts.</p>
-  </a>
-  <a class="block border rounded-2xl p-5 hover:shadow-sm bg-gray-50" href="/blog/print-bingo-cards-pdf.html">
-    <h2 class="text-xl font-bold mb-2">How to print bingo cards as PDF (high quality)</h2>
-    <p class="text-gray-700">Printer settings, margins, and troubleshooting for clean printouts.</p>
-  </a>
-  <a class="block border rounded-2xl p-5 hover:shadow-sm bg-gray-50" href="/blog/bingo-rules-variations.html">
-    <h2 class="text-xl font-bold mb-2">Bingo rules & variations (quick guide)</h2>
-    <p class="text-gray-700">Classic rules, patterns, speed rounds, and fairness tips.</p>
-  </a>
-</div>
-
+    <h1 class="text-3xl md:text-4xl font-extrabold text-blue-800 mb-4" data-i18n="h1">Bingo Blog & Guides | Print My Bingo</h1>
+    <div id="content" class="prose max-w-none prose-p:leading-relaxed prose-li:leading-relaxed prose-headings:text-gray-900"></div>
     <div class="mt-10 p-5 bg-blue-50 rounded-2xl">
-      <p class="font-semibold text-blue-900 mb-2">Generate cards now</p>
-      <p class="text-blue-900/90">Open the generator, choose Numbers or Words, and print or save as PDF.</p>
-      <a class="inline-block mt-4 bg-blue-600 text-white px-5 py-3 rounded-xl font-bold" href="/">Open Generator</a>
+      <p class="font-semibold text-blue-900 mb-2" data-i18n="ctaT">Generate cards now</p>
+      <p class="text-blue-900/90" data-i18n="ctaB">Open the generator, choose Numbers or Words, and print or save as PDF.</p>
+      <a class="inline-block mt-4 bg-blue-600 text-white px-5 py-3 rounded-xl font-bold" href="/" data-i18n="ctaBtn">Open Generator</a>
     </div>
   </article>
 </main>
+
 <footer class="text-center text-sm text-gray-500 py-10">
   © 2026 Print My Bingo • <a class="underline" href="/sitemap.xml">Sitemap</a>
 </footer>
+
+<script>
+const T = {
+  en: {
+    navBlog: "Blog", navPrivacy: "Privacy", navTerms: "Terms", navAbout: "About",
+    h1: "Bingo Blog & Guides | Print My Bingo",
+    ctaT: "Generate cards now",
+    ctaB: "Open the generator, choose Numbers or Words, and print or save as PDF.",
+    ctaBtn: "Open Generator",
+    back: "← Print My Bingo",
+    body: `<p>Practical guides and ready-to-use ideas to help you run better bingo activities. These pages are written for real people and optimized for search.</p>
+<div class="grid md:grid-cols-2 gap-6 mt-6">
+  <a class="block border rounded-2xl p-5 hover:shadow-sm bg-gray-50" href="/blog/classroom-bingo.html"><h2 class="text-xl font-bold mb-2">Classroom Bingo (Teachers)</h2><p>Vocabulary, math, science, and review formats.</p></a>
+  <a class="block border rounded-2xl p-5 hover:shadow-sm bg-gray-50" href="/blog/fundraising-bingo-night.html"><h2 class="text-xl font-bold mb-2">Fundraising Bingo Night</h2><p>Rules, prizes, and printing unique cards.</p></a>
+  <a class="block border rounded-2xl p-5 hover:shadow-sm bg-gray-50" href="/blog/birthday-party-bingo.html"><h2 class="text-xl font-bold mb-2">Birthday Party Bingo</h2><p>Themes and word lists for kids.</p></a>
+  <a class="block border rounded-2xl p-5 hover:shadow-sm bg-gray-50" href="/blog/human-bingo-icebreaker.html"><h2 class="text-xl font-bold mb-2">Human Bingo Icebreaker</h2><p>Prompts for team-building and workshops.</p></a>
+  <a class="block border rounded-2xl p-5 hover:shadow-sm bg-gray-50" href="/blog/print-bingo-cards-pdf.html"><h2 class="text-xl font-bold mb-2">Print as PDF</h2><p>Margins, scale, orientation, troubleshooting.</p></a>
+  <a class="block border rounded-2xl p-5 hover:shadow-sm bg-gray-50" href="/blog/bingo-rules-variations.html"><h2 class="text-xl font-bold mb-2">Bingo Rules & Variations</h2><p>Patterns, speed rounds, fairness tips.</p></a>
+</div>`
+  },
+  he: {
+    navBlog: "בלוג", navPrivacy: "פרטיות", navTerms: "תנאי שימוש", navAbout: "אודות",
+    h1: "בלוג ומדריכים | Print My Bingo",
+    ctaT: "צור/י כרטיסים עכשיו",
+    ctaB: "חזור/י למחולל, בחר/י מספרים או מילים, והדפס/י או שמור/י ל‑PDF.",
+    ctaBtn: "פתח את המחולל",
+    back: "← Print My Bingo",
+    body: `<p>מדריכים פרקטיים ורעיונות מוכנים שיעזרו לך להריץ בינגו טוב יותר — וגם מותאמים לחיפוש בגוגל.</p>
+<div class="grid md:grid-cols-2 gap-6 mt-6">
+  <a class="block border rounded-2xl p-5 hover:shadow-sm bg-gray-50" href="/blog/classroom-bingo.html"><h2 class="text-xl font-bold mb-2">בינגו בכיתה (מורים)</h2><p>אוצר מילים, מתמטיקה, מדעים ומשחקי חזרה.</p></a>
+  <a class="block border rounded-2xl p-5 hover:shadow-sm bg-gray-50" href="/blog/fundraising-bingo-night.html"><h2 class="text-xl font-bold mb-2">ערב בינגו להתרמה</h2><p>חוקים, פרסים והדפסת כרטיסים ייחודיים.</p></a>
+  <a class="block border rounded-2xl p-5 hover:shadow-sm bg-gray-50" href="/blog/birthday-party-bingo.html"><h2 class="text-xl font-bold mb-2">בינגו ליום הולדת</h2><p>ערכות נושא ורשימות מילים לילדים.</p></a>
+  <a class="block border rounded-2xl p-5 hover:shadow-sm bg-gray-50" href="/blog/human-bingo-icebreaker.html"><h2 class="text-xl font-bold mb-2">בינגו אנושי</h2><p>משפטים לאייסברייקר באירועי צוות.</p></a>
+  <a class="block border rounded-2xl p-5 hover:shadow-sm bg-gray-50" href="/blog/print-bingo-cards-pdf.html"><h2 class="text-xl font-bold mb-2">הדפסה ל‑PDF</h2><p>שוליים, קנה מידה, כיוון, פתרון תקלות.</p></a>
+  <a class="block border rounded-2xl p-5 hover:shadow-sm bg-gray-50" href="/blog/bingo-rules-variations.html"><h2 class="text-xl font-bold mb-2">חוקי בינגו ווריאציות</h2><p>תבניות ניצחון, סבבים מהירים, טיפים להוגנות.</p></a>
+</div>`
+  }
+};
+
+let lang = (navigator.language || "").toLowerCase().startsWith("he") ? "he" : "en";
+
+function apply() {
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === "he" ? "rtl" : "ltr";
+  document.getElementById("langBtn").textContent = lang === "he" ? "English" : "עברית";
+  document.getElementById("backLink").textContent = T[lang].back;
+  document.getElementById("content").innerHTML = T[lang].body;
+
+  for (const el of document.querySelectorAll("[data-i18n]")) {
+    const k = el.getAttribute("data-i18n");
+    if (T[lang][k]) el.textContent = T[lang][k];
+  }
+
+  document.title = (lang === "he") ? "בלוג ומדריכים | Print My Bingo" : "Bingo Blog & Guides | Print My Bingo";
+  const metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc) metaDesc.setAttribute("content", (lang === "he") ? "מדריכי בינגו, פעילויות לכיתה, ערכות נושא למסיבות וטיפים להדפסה." : "Bingo guides, classroom activities, party themes, and printing tips.");
+}
+
+document.getElementById("langBtn").addEventListener("click", () => {
+  lang = (lang === "he") ? "en" : "he";
+  apply();
+});
+
+apply();
+</script>
 </body>
 </html>
