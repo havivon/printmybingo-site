@@ -7,12 +7,15 @@
 <meta name="description" content="Privacy policy for Print My Bingo.">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://printmybingo.com/privacy.html">
+<link rel="alternate" href="https://printmybingo.com/privacy.html" hreflang="x-default">
+<link rel="alternate" href="https://printmybingo.com/privacy.html" hreflang="en">
+<link rel="alternate" href="https://printmybingo.com/privacy.html" hreflang="he">
 <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-50 text-gray-800">
 <header class="bg-white border-b">
   <div class="max-w-6xl mx-auto p-4 flex items-center justify-between">
-    <a href="/" class="font-bold text-blue-700" id="backLink">← Print My Bingo</a>
+    <a href="/" class="font-bold text-blue-700" data-i18n="back">← Print My Bingo</a>
     <div class="flex items-center gap-4 text-sm">
       <nav class="hidden sm:flex gap-4">
         <a class="underline" href="/blog.html" data-i18n="navBlog">Blog</a>
@@ -27,13 +30,8 @@
 
 <main class="max-w-6xl mx-auto p-4">
   <article class="bg-white border rounded-2xl p-6 md:p-10 shadow-sm">
-    <h1 class="text-3xl md:text-4xl font-extrabold text-blue-800 mb-4" data-i18n="h1">Privacy Policy | Print My Bingo</h1>
+    <h1 class="text-3xl md:text-4xl font-extrabold text-blue-800 mb-4" id="h1"></h1>
     <div id="content" class="prose max-w-none prose-p:leading-relaxed prose-li:leading-relaxed prose-headings:text-gray-900"></div>
-    <div class="mt-10 p-5 bg-blue-50 rounded-2xl">
-      <p class="font-semibold text-blue-900 mb-2" data-i18n="ctaT">Generate cards now</p>
-      <p class="text-blue-900/90" data-i18n="ctaB">Open the generator, choose Numbers or Words, and print or save as PDF.</p>
-      <a class="inline-block mt-4 bg-blue-600 text-white px-5 py-3 rounded-xl font-bold" href="/" data-i18n="ctaBtn">Open Generator</a>
-    </div>
   </article>
 </main>
 
@@ -44,58 +42,83 @@
 <script>
 const T = {
   en: {
-    navBlog: "Blog", navPrivacy: "Privacy", navTerms: "Terms", navAbout: "About",
+    title: "Privacy Policy | Print My Bingo",
+    desc: "Privacy policy for Print My Bingo.",
     h1: "Privacy Policy | Print My Bingo",
-    ctaT: "Generate cards now",
-    ctaB: "Open the generator, choose Numbers or Words, and print or save as PDF.",
-    ctaBtn: "Open Generator",
-    back: "← Print My Bingo",
-    body: `<p><strong>Print My Bingo</strong> (“we”, “us”) provides a free bingo card generator. This Privacy Policy explains what information may be processed when you use the website.</p>
-<h2>1) No account required</h2><p>You can generate printable bingo cards without creating an account or submitting personal details.</p>
-<h2>2) Local storage (saved settings)</h2><p>The generator may store your preferences (board size, colors, word lists) in your browser’s local storage so the site remembers settings next time. This data stays on your device.</p>
-<h2>3) Cookies and analytics</h2><p>We may use cookies or similar technologies to measure traffic and improve the site. Analytics typically reports aggregated metrics rather than identifying you directly.</p>
-<h2>4) Advertising (Google AdSense)</h2><p>The site may display ads. Advertising partners may use cookies to personalize ads and measure performance. You can control ad personalization in your Google account settings.</p>
-<h2>5) Contact</h2><p>Email: <a class="text-blue-700 underline" href="mailto:havivontm@gmail.com">havivontm@gmail.com</a></p>
-<p class="text-sm text-gray-500">Last updated: 2026-02-04</p>`
+    navBlog:"Blog", navPrivacy:"Privacy", navTerms:"Terms", navAbout:"About",
+    back:"← Print My Bingo",
+    body: `<p><strong>Print My Bingo</strong> (“we”, “us”) is a free bingo card generator. This Privacy Policy explains what information may be processed when you use the website.</p>
+
+<h3 class="mt-4 font-bold">1) No account required</h3>
+<p>You can generate printable bingo cards without creating an account or submitting personal information.</p>
+
+<h3 class="mt-4 font-bold">2) Local storage (saved preferences)</h3>
+<p>To improve usability, the site may store settings in your browser’s local storage (for example: board size, layout options, colors, and word lists). This data stays on your device and can be cleared in your browser settings.</p>
+
+<h3 class="mt-4 font-bold">3) Cookies and analytics</h3>
+<p>We may use cookies or similar technologies to measure traffic and improve performance. Analytics typically provides aggregated statistics (such as page views and device type) rather than directly identifying you.</p>
+
+<h3 class="mt-4 font-bold">4) Advertising (Google AdSense)</h3>
+<p>The site may display ads via Google AdSense or similar services. Advertising partners may use cookies to personalize ads and measure ad performance. You can manage ad personalization in your Google account settings.</p>
+
+<h3 class="mt-4 font-bold">5) Contact</h3>
+<p>If you have any questions about privacy, email: <a class="underline text-blue-700" href="mailto:havivontm@gmail.com">havivontm@gmail.com</a>.</p>
+
+<p class="text-sm text-gray-500 mt-4">Last updated: 2026-02-05</p>`
   },
   he: {
-    navBlog: "בלוג", navPrivacy: "פרטיות", navTerms: "תנאי שימוש", navAbout: "אודות",
+    title: "מדיניות פרטיות | Print My Bingo",
+    desc: "מדיניות פרטיות של Print My Bingo.",
     h1: "מדיניות פרטיות | Print My Bingo",
-    ctaT: "צור/י כרטיסים עכשיו",
-    ctaB: "חזור/י למחולל, בחר/י מספרים או מילים, והדפס/י או שמור/י ל‑PDF.",
-    ctaBtn: "פתח את המחולל",
-    back: "← Print My Bingo",
-    body: `<p><strong>Print My Bingo</strong> (“אנחנו”) מפעיל מחולל בינגו חינמי. מדיניות זו מסבירה איזה מידע עשוי להיאסף או להיות מעובד בעת השימוש באתר.</p>
-<h2>1) אין צורך בהרשמה</h2><p>אפשר ליצור כרטיסי בינגו להדפסה בלי לפתוח חשבון ובלי להזין פרטים אישיים.</p>
-<h2>2) שמירת הגדרות בדפדפן (Local Storage)</h2><p>לנוחותך, האתר עשוי לשמור העדפות (גודל לוח, צבעים, רשימות מילים) ב־local storage בדפדפן. הנתונים נשמרים אצלך במכשיר.</p>
-<h2>3) Cookies וכלי מדידה</h2><p>ייתכן שנשתמש ב־Cookies או טכנולוגיות דומות למדידת תנועה ושיפור האתר. לרוב מדובר בנתונים מצרפיים ולא בזיהוי אישי.</p>
-<h2>4) פרסומות (Google AdSense)</h2><p>האתר עשוי להציג פרסומות. שותפי פרסום עשויים להשתמש ב־Cookies להתאמת פרסומות ולמדידת ביצועים. אפשר לנהל התאמה אישית דרך הגדרות Google.</p>
-<h2>5) יצירת קשר</h2><p>אימייל: <a class="text-blue-700 underline" href="mailto:havivontm@gmail.com">havivontm@gmail.com</a></p>
-<p class="text-sm text-gray-500">עודכן לאחרונה: 2026-02-04</p>`
+    navBlog:"בלוג", navPrivacy:"פרטיות", navTerms:"תנאי שימוש", navAbout:"אודות",
+    back:"← Print My Bingo",
+    body: `<p><strong>Print My Bingo</strong> (“אנחנו”) הוא מחולל בינגו חינמי. מדיניות פרטיות זו מסבירה איזה מידע עשוי להיות מעובד בעת שימוש באתר.</p>
+
+<h3 class="mt-4 font-bold">1) אין צורך בהרשמה</h3>
+<p>אפשר ליצור כרטיסי בינגו להדפסה בלי לפתוח חשבון ובלי להזין פרטים אישיים.</p>
+
+<h3 class="mt-4 font-bold">2) שמירת העדפות בדפדפן (Local Storage)</h3>
+<p>לנוחותך, האתר עשוי לשמור הגדרות ב־local storage בדפדפן (למשל: גודל לוח, אפשרויות תצוגה, צבעים ורשימות מילים). הנתונים נשמרים במכשיר שלך וניתן למחוק אותם דרך הגדרות הדפדפן.</p>
+
+<h3 class="mt-4 font-bold">3) Cookies וכלי אנליטיקס</h3>
+<p>ייתכן שנשתמש ב־Cookies או טכנולוגיות דומות כדי למדוד תנועה ולשפר ביצועים. לרוב מדובר בנתונים מצרפיים (כמו צפיות בדף וסוג מכשיר) ולא בזיהוי אישי ישיר.</p>
+
+<h3 class="mt-4 font-bold">4) פרסום (Google AdSense)</h3>
+<p>האתר עשוי להציג פרסומות באמצעות Google AdSense או שירותים דומים. שותפי פרסום עשויים להשתמש ב־Cookies להתאמת פרסומות ולמדידת ביצועים. אפשר לנהל התאמה אישית דרך הגדרות החשבון בגוגל.</p>
+
+<h3 class="mt-4 font-bold">5) יצירת קשר</h3>
+<p>לשאלות בנושא פרטיות: <a class="underline text-blue-700" href="mailto:havivontm@gmail.com">havivontm@gmail.com</a>.</p>
+
+<p class="text-sm text-gray-500 mt-4">עודכן לאחרונה: 2026-02-05</p>`
   }
 };
 
-let lang = (navigator.language || "").toLowerCase().startsWith("he") ? "he" : "en";
-
-function apply() {
-  document.documentElement.lang = lang;
-  document.documentElement.dir = lang === "he" ? "rtl" : "ltr";
-  document.getElementById("langBtn").textContent = lang === "he" ? "English" : "עברית";
-  document.getElementById("backLink").textContent = T[lang].back;
-  document.getElementById("content").innerHTML = T[lang].body;
-
-  for (const el of document.querySelectorAll("[data-i18n]")) {
-    const k = el.getAttribute("data-i18n");
-    if (T[lang][k]) el.textContent = T[lang][k];
-  }
-
-  document.title = (lang === "he") ? "מדיניות פרטיות | Print My Bingo" : "Privacy Policy | Print My Bingo";
-  const metaDesc = document.querySelector('meta[name="description"]');
-  if (metaDesc) metaDesc.setAttribute("content", (lang === "he") ? "מדיניות פרטיות של Print My Bingo." : "Privacy policy for Print My Bingo.");
+function getInitialLang(){
+  const saved = (localStorage.getItem('pm_lang') || '').toLowerCase();
+  if(saved === 'he' || saved === 'en') return saved;
+  return (navigator.language || '').toLowerCase().startsWith('he') ? 'he' : 'en';
 }
 
-document.getElementById("langBtn").addEventListener("click", () => {
-  lang = (lang === "he") ? "en" : "he";
+let lang = getInitialLang();
+
+function apply(){
+  document.documentElement.lang = lang;
+  document.documentElement.dir = (lang === 'he') ? 'rtl' : 'ltr';
+  document.title = T[lang].title;
+  const metaDesc = document.querySelector('meta[name="description"]');
+  if(metaDesc) metaDesc.setAttribute('content', T[lang].desc);
+  document.getElementById('h1').textContent = T[lang].h1;
+  document.getElementById('content').innerHTML = T[lang].body;
+  document.getElementById('langBtn').textContent = (lang === 'he') ? 'English' : 'עברית';
+  for(const el of document.querySelectorAll('[data-i18n]')){
+    const k = el.getAttribute('data-i18n');
+    if(T[lang][k]) el.textContent = T[lang][k];
+  }
+}
+
+document.getElementById('langBtn').addEventListener('click', () => {
+  lang = (lang === 'he') ? 'en' : 'he';
+  localStorage.setItem('pm_lang', lang);
   apply();
 });
 
